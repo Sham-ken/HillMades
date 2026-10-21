@@ -1,0 +1,16 @@
+[
+  {
+    "id": "fb-1",
+    "customerName": "Karthik Raja",
+    "rating": 5,
+    "comment": "The Ooty Varkey was layered, super crispy, and delivered fresh! Tastes just like the original bakery at Charring Cross.",
+    "date": "2026-10-19"
+  },
+  {
+    "id": "fb-2",
+    "customerName": "Ananya Priya",
+    "rating": 5,
+    "comment": "Authentic homemade chocolates. Melt in mouth texture and generous roasted nuts.",
+    "date": "2026-10-19"
+  }
+]

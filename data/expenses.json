@@ -1,0 +1,16 @@
+[
+  {
+    "id": "exp-1",
+    "date": "2026-10-19",
+    "category": "Raw Materials",
+    "description": "Pure butter & flour for Ooty Varkey baking batch",
+    "amount": 250
+  },
+  {
+    "id": "exp-2",
+    "date": "2026-10-19",
+    "category": "Packaging",
+    "description": "Zip-lock food grade moisture barrier pouches",
+    "amount": 180
+  }
+]

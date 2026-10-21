@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Register | Ooty Hills</title>
+  <meta name="description" content="Sign in or register your customer account for Ooty Hills authentic snacks, homemade chocolates and teas with instant mobile OTP verification.">
+
+  <!-- Google Fonts: Montserrat & Cormorant Garamond -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
+</head>
+<body style="background: #edf3fa; margin: 0; padding: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif;">
+
+  <!-- ================= AUTH SPLIT CARD STAGE (NO HEADER, NO FOOTER) ================= -->
+  <main class="split-auth-page" style="min-height: 100vh; width: 100%; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px 20px;">
+    
+    <!-- Top Back to Store Link -->
+    <div style="width: 100%; max-width: 960px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; z-index: 20;">
+      <a href="/" style="display: inline-flex; align-items: center; gap: 6px; color: #475569; text-decoration: none; font-size: 0.86rem; font-weight: 600; transition: color 0.2s;">
+        <span>←</span> Back to Store
+      </a>
+      <span style="font-size: 0.82rem; color: #94a3b8; font-weight: 500;">
+        🏔️ Ooty Hills Nilgiris Heritage
+      </span>
+    </div>
+
+    <div class="split-auth-card">
+
+      <!-- ================= LEFT COLUMN: HERO SPECIALTY SHOWCASE ================= -->
+      <div class="split-auth-left">
+        <div class="split-left-header">
+          <h2 id="leftHeroTitle">Welcome Back</h2>
+          <p id="leftHeroSubtitle">Sign in to continue your journey with us.</p>
+        </div>
+
+        <!-- Project Image Showcase: Fresh Ooty Varkey, Nilgiri Tea & Chocolates -->
+        <div class="split-left-image-box">
+          <img src="/images/auth-project.jpg" id="leftHeroImage" alt="Ooty Hills Authentic Varkey, Tea & Chocolates">
+        </div>
+      </div>
+
+      <!-- ================= RIGHT COLUMN: INTERACTIVE FORM ================= -->
+      <div class="split-auth-right">
+
+        <!-- Active Customer Session Banner (with Logout Confirmation) -->
+        <div id="activeSessionContainer" style="display: none; margin-bottom: 20px;"></div>
+
+        <!-- Alert Notification Box -->
+        <div id="authAlertBox" style="display: none; margin-bottom: 18px;"></div>
+
+        <!-- 1. LOGIN MODE (SCREENSHOT 2 EXACT REPLICA) -->
+        <div id="sectionLogin">
+          <div class="split-right-header">
+            <h3>Login</h3>
+            <p>Please enter your credentials to access your account.</p>
+          </div>
+
+          <form id="formLoginSubmit" onsubmit="handleLoginSubmit(event)">
+            <!-- Mobile Number with Phone Icon -->
+            <div class="split-input-wrapper">
+              <span class="split-input-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </span>
+              <input
+                type="tel"
+                id="loginPhoneInput"
+                class="split-input-control"
+                placeholder="Mobile number (10 digits)"
+                maxlength="10"
+                pattern="[6-9][0-9]{9}"
+                title="Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9"
+                inputmode="numeric"
+                required
+                autofocus
+                autocomplete="tel"
+              >
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" class="btn-split-primary" id="btnSubmitLogin">
+              Login
+            </button>
+          </form>
+
+          <div class="split-bottom-switch">
+            New here? <button type="button" onclick="showRegisterView()">Register</button>
+          </div>
+        </div>
+
+        <!-- 2. REGISTER MODE (SCREENSHOT 1 EXACT REPLICA) -->
+        <div id="sectionRegister" style="display: none;">
+          <div class="split-right-header">
+            <h3>Register</h3>
+            <p>Fill in the details to create your account.</p>
+          </div>
+
+          <form id="formRegisterSubmit" onsubmit="handleRegisterSubmit(event)">
+            <!-- Full Name (Letters and spaces only) -->
+            <div class="split-input-wrapper">
+              <span class="split-input-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </span>
+              <input
+                type="text"
+                id="regName"
+                class="split-input-control"
+                placeholder="Full Name (Letters only)"
+                maxlength="50"
+                pattern="[a-zA-Z\s.'-]{2,50}"
+                title="Please enter your full name (letters only, at least 2 characters)"
+                required
+                autocomplete="name"
+              >
+            </div>
+
+            <!-- Mobile Number (10 digits only) -->
+            <div class="split-input-wrapper">
+              <span class="split-input-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+              </span>
+              <input
+                type="tel"
+                id="regPhone"
+                class="split-input-control"
+                placeholder="Mobile number (10 digits)"
+                maxlength="10"
+                pattern="[6-9][0-9]{9}"
+                title="Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9"
+                inputmode="numeric"
+                required
+                autocomplete="tel"
+              >
+            </div>
+
+            <!-- Delivery Address -->
+            <div class="split-input-wrapper">
+              <span class="split-input-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              </span>
+              <input
+                type="text"
+                id="regAddress"
+                class="split-input-control"
+                placeholder="Delivery address (Flat, Street)"
+                required
+                autocomplete="street-address"
+              >
+            </div>
+
+            <!-- City and Pincode (No auto-filling, custom input with validation) -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+              <div class="split-input-wrapper" style="margin-bottom: 0;">
+                <span class="split-input-icon">
+                  <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                </span>
+                <input
+                  type="text"
+                  id="regCity"
+                  class="split-input-control"
+                  placeholder="City / Town"
+                  maxlength="40"
+                  pattern="[a-zA-Z\s.'-]{2,40}"
+                  title="Please enter your city (letters only)"
+                  required
+                  autocomplete="address-level2"
+                >
+              </div>
+
+              <div class="split-input-wrapper" style="margin-bottom: 0;">
+                <span class="split-input-icon">
+                  <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+                </span>
+                <input
+                  type="tel"
+                  id="regPincode"
+                  class="split-input-control"
+                  placeholder="Pincode (6 digits)"
+                  maxlength="6"
+                  pattern="[0-9]{6}"
+                  title="Please enter your 6-digit postal pincode"
+                  inputmode="numeric"
+                  required
+                  autocomplete="postal-code"
+                >
+              </div>
+            </div>
+
+            <!-- Register Button -->
+            <button type="submit" class="btn-split-primary" id="btnSubmitRegister">
+              Register
+            </button>
+          </form>
+
+          <div class="split-bottom-switch">
+            Already have an account? <button type="button" onclick="showLoginView()">Login</button>
+          </div>
+        </div>
+
+        <!-- 3. OTP VERIFICATION MODE (STEP 2) -->
+        <div id="sectionOtp" style="display: none;">
+          <div class="split-right-header">
+            <h3>Enter OTP</h3>
+            <p>Verification code sent to <strong id="dispOtpPhone" style="color: #2563eb;">+91 ----------</strong></p>
+          </div>
+
+          <!-- Real Mobile Delivery Notification Card -->
+          <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px;">
+            <div style="font-size: 1.4rem;">📲</div>
+            <div style="font-size: 0.82rem; color: #166534; text-align: left; line-height: 1.4;">
+              <strong style="display: block; font-size: 0.86rem; color: #14532d;">Dispatched to <span id="dispOtpPhoneCard">+91 ----------</span></strong>
+              Sent to your mobile via WhatsApp & Cellular SMS.
+            </div>
+          </div>
+
+          <!-- Real WhatsApp Direct OTP Link -->
+          <div class="auth-whatsapp-box" style="margin-bottom: 16px;">
+            <a href="#" target="_blank" id="btnWaDirectLink" class="btn-open-wa-otp" style="width: 100%; justify-content: center; font-size: 0.88rem; padding: 12px 16px; border-radius: 10px; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35); text-decoration: none; display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 1.2rem;">💬</span> Open WhatsApp to View OTP Code
+            </a>
+          </div>
+
+          <!-- Local Development OTP Helper (Visible on Localhost, Auto-Hidden on Live) -->
+          <div id="localOtpDisplayCard" style="display: none; background: #fefce8; border: 1.5px dashed #eab308; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; cursor: pointer; text-align: center; transition: all 0.2s;" onclick="autoFillOtpFromToast()" title="Click to Auto-Fill OTP">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <span style="font-size: 0.74rem; font-weight: 700; color: #854d0e; text-transform: uppercase; letter-spacing: 0.5px;">
+                🛠️ Local Dev Mode • Test OTP Code:
+              </span>
+              <span style="background: #eab308; color: #713f12; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 6px;">
+                ⚡ Auto-Fill
+              </span>
+            </div>
+            <div style="font-family: monospace; font-size: 1.65rem; font-weight: 800; color: #1c1917; letter-spacing: 6px;">
+              <span id="localOtpCodeNumber">----</span>
+            </div>
+            <div style="font-size: 0.72rem; color: #a16207; margin-top: 3px;">
+              (Click anywhere on this card to automatically fill the boxes below)
+            </div>
+          </div>
+
+          <form id="formVerifyOtp" onsubmit="handleVerifyOtpSubmit(event)">
+            <!-- 4 Digit Monospace Boxes -->
+            <div class="otp-boxes-grid" style="margin: 18px 0 22px;">
+              <input type="tel" class="otp-box-input" id="otpBox0" maxlength="1" pattern="[0-9]" inputmode="numeric" autofocus required>
+              <input type="tel" class="otp-box-input" id="otpBox1" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+              <input type="tel" class="otp-box-input" id="otpBox2" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+              <input type="tel" class="otp-box-input" id="otpBox3" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+            </div>
+
+            <!-- Verify Button -->
+            <button type="submit" class="btn-split-primary" id="btnSubmitOtp">
+              Verify OTP & Access Account
+            </button>
+
+            <!-- Actions Row -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; font-size: 0.84rem;">
+              <button type="button" onclick="returnFromOtp()" style="background: none; border: none; color: #64748b; cursor: pointer; text-decoration: underline; font-family: var(--font-sans); font-weight: 600;">
+                ← Change Number
+              </button>
+              <div>
+                <span id="resendCountdownText" style="color: #94a3b8;">Resend in <strong id="timerSecs">45</strong>s</span>
+                <button type="button" id="btnResendOtp" onclick="handleResendOtp()" style="display: none; background: none; border: none; color: #2563eb; font-weight: 700; cursor: pointer; text-decoration: underline;">
+                  Resend OTP 🔄
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating Local OTP Notification Banner (Only visible in Local Development) -->
+  <div id="liveOtpToast" class="auth-live-toast" style="display: none;">
+    <div style="font-size: 1.5rem;">🛠️</div>
+    <div>
+      <div style="font-size: 0.74rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-gold); font-weight: 700;">
+        Local Dev Mode (Auto-Hides on Live)
+      </div>
+      <div style="font-size: 0.88rem; margin-top: 2px;">
+        Your verification code is: <span class="toast-otp-chip" id="toastOtpCode">----</span>
+      </div>
+    </div>
+    <button type="button" class="btn-autofill-otp" id="btnToastAutofill" onclick="autoFillOtpFromToast()">
+      ⚡ Auto-Fill
+    </button>
+  </div>
+
+  <!-- Shared App JS -->
+  <script src="/js/app.js"></script>
+
+  <!-- Split Auth Card Logic Script -->
+  <script>
+    let activePhone = '';
+    let currentOtp = '';
+    let countdownInterval = null;
+    let activeView = 'login'; // 'login', 'register', or 'otp'
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tabParam = urlParams.get('tab');
+      const phoneParam = urlParams.get('phone');
+      const registeredParam = urlParams.get('registered');
+      const autoOtpParam = urlParams.get('autoOtp');
+
+      checkActiveCustomerSession();
+
+      if (tabParam === 'signup' || tabParam === 'register' || window.location.pathname === '/register' || window.location.pathname === '/signup') {
+        showRegisterView();
+      } else {
+        showLoginView();
+      }
+
+      if (registeredParam) {
+        showAlert('🎉 Account created successfully! Please enter your OTP below to verify your login.', 'info');
+      }
+
+      if (phoneParam) {
+        const clean = phoneParam.replace(/\D/g, '').slice(-10);
+        const loginInp = document.getElementById('loginPhoneInput');
+        const regInp = document.getElementById('regPhone');
+        if (loginInp) loginInp.value = clean;
+        if (regInp) regInp.value = clean;
+        activePhone = clean;
+
+        if (autoOtpParam === '1' && clean.length === 10) {
+          triggerSendOtp(clean);
+        }
+      }
+
+      setupOtpInputListeners();
+      setupInputValidationListeners();
+    });
+
+    // Toggle to Login View (Screenshot 2)
+    function showLoginView() {
+      activeView = 'login';
+      document.getElementById('sectionLogin').style.display = 'block';
+      document.getElementById('sectionRegister').style.display = 'none';
+      document.getElementById('sectionOtp').style.display = 'none';
+
+      // Left Column update
+      document.getElementById('leftHeroTitle').textContent = 'Welcome Back';
+      document.getElementById('leftHeroSubtitle').textContent = 'Sign in to continue your journey with us.';
+
+      clearAlert();
+      document.getElementById('loginPhoneInput')?.focus();
+    }
+
+    // Toggle to Register View (Screenshot 1)
+    function showRegisterView() {
+      activeView = 'register';
+      document.getElementById('sectionLogin').style.display = 'none';
+      document.getElementById('sectionRegister').style.display = 'block';
+      document.getElementById('sectionOtp').style.display = 'none';
+
+      // Left Column update
+      document.getElementById('leftHeroTitle').textContent = 'Create Account';
+      document.getElementById('leftHeroSubtitle').textContent = 'Join us and get started today.';
+
+      clearAlert();
+      document.getElementById('regName')?.focus();
+    }
+
+    function checkActiveCustomerSession() {
+      const container = document.getElementById('activeSessionContainer');
+      const custData = localStorage.getItem('ooty_customer');
+      if (!custData) {
+        if (container) {
+          container.innerHTML = '';
+          container.style.display = 'none';
+        }
+        return;
+      }
+      try {
+        const cust = JSON.parse(custData);
+        if (!cust || !cust.name) return;
+        const initials = cust.name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
+        if (container) {
+          container.style.display = 'block';
+          container.innerHTML = `
+            <div class="login-active-session-card">
+              <div class="session-card-left">
+                <div class="session-avatar">${initials}</div>
+                <div class="session-meta">
+                  <div class="session-badge">✓ Active Customer Session</div>
+                  <div class="session-name">${cust.name}</div>
+                  <div class="session-phone">+91 ${cust.phone}</div>
+                </div>
+              </div>
+              <div class="session-card-actions">
+                <a href="/" class="btn-session-store">Store →</a>
+                <button type="button" class="btn-session-logout" onclick="promptLogoutFromLoginPage()">
+                  Log Out 🚪
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      } catch (e) {}
+    }
+
+    function promptLogoutFromLoginPage() {
+      const custData = localStorage.getItem('ooty_customer');
+      let custName = 'Valued Customer';
+      let custPhone = '';
+      if (custData) {
+        try {
+          const c = JSON.parse(custData);
+          custName = c.name;
+          custPhone = c.phone;
+        } catch (e) {}
+      }
+
+      window.showLogoutConfirmationModal({
+        name: custName,
+        phone: custPhone,
+        onConfirm: () => {
+          localStorage.removeItem('ooty_customer');
+          if (typeof storeState !== 'undefined') storeState.customer = null;
+          if (typeof updateCustomerAccountUI === 'function') updateCustomerAccountUI();
+          checkActiveCustomerSession();
+          window.showLogoutSuccessModal({
+            onDone: () => {
+              showLoginView();
+            }
+          });
+        }
+      });
+    }
+
+    function showAlert(message, type = 'error') {
+      const box = document.getElementById('authAlertBox');
+      if (!box) return;
+      box.className = `auth-alert ${type}`;
+      box.innerHTML = `<span>${type === 'info' ? 'ℹ️' : type === 'warning' ? '⚠️' : '❌'}</span> <div>${message}</div>`;
+      box.style.display = 'flex';
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function clearAlert() {
+      const box = document.getElementById('authAlertBox');
+      if (box) {
+        box.innerHTML = '';
+        box.style.display = 'none';
+      }
+    }
+
+    // Real-time input filtering to strictly prevent invalid characters while typing
+    function setupInputValidationListeners() {
+      // 1. Full Name: immediately strip any numbers or disallowed symbols (allow letters, spaces, dot, apostrophe, hyphen)
+      const nameInp = document.getElementById('regName');
+      if (nameInp) {
+        nameInp.addEventListener('input', (e) => {
+          const filtered = e.target.value.replace(/[^a-zA-Z\s.'-]/g, '');
+          if (filtered !== e.target.value) {
+            e.target.value = filtered;
+          }
+        });
+      }
+
+      // 2. Mobile Phone (Register): immediately strip any non-digit character and restrict to 10
+      const phoneInp = document.getElementById('regPhone');
+      if (phoneInp) {
+        phoneInp.addEventListener('input', (e) => {
+          const filtered = e.target.value.replace(/\D/g, '').slice(0, 10);
+          if (filtered !== e.target.value) {
+            e.target.value = filtered;
+          }
+        });
+      }
+
+      // 3. Mobile Phone (Login): immediately strip any non-digit character and restrict to 10
+      const loginInp = document.getElementById('loginPhoneInput');
+      if (loginInp) {
+        loginInp.addEventListener('input', (e) => {
+          const filtered = e.target.value.replace(/\D/g, '').slice(0, 10);
+          if (filtered !== e.target.value) {
+            e.target.value = filtered;
+          }
+        });
+      }
+
+      // 4. City: immediately strip any numbers or symbols while typing (letters and spaces only)
+      const cityInp = document.getElementById('regCity');
+      if (cityInp) {
+        cityInp.addEventListener('input', (e) => {
+          const filtered = e.target.value.replace(/[^a-zA-Z\s.'-]/g, '');
+          if (filtered !== e.target.value) {
+            e.target.value = filtered;
+          }
+        });
+      }
+
+      // 5. Pincode: immediately strip any non-digit character and restrict to 6
+      const pinInp = document.getElementById('regPincode');
+      if (pinInp) {
+        pinInp.addEventListener('input', (e) => {
+          const filtered = e.target.value.replace(/\D/g, '').slice(0, 6);
+          if (filtered !== e.target.value) {
+            e.target.value = filtered;
+          }
+        });
+      }
+    }
+
+    // 1. Login Handler
+    async function handleLoginSubmit(e) {
+      e.preventDefault();
+      clearAlert();
+      const phoneInp = document.getElementById('loginPhoneInput');
+      const phone = phoneInp ? phoneInp.value.replace(/\D/g, '').slice(0, 10) : '';
+
+      if (!phone) {
+        showAlert('Please enter your 10-digit mobile number.', 'warning');
+        phoneInp?.focus();
+        return;
+      }
+      if (phone.length !== 10) {
+        showAlert('Mobile number must be exactly 10 digits.', 'warning');
+        phoneInp?.focus();
+        return;
+      }
+      if (!/^[6-9]\d{9}$/.test(phone)) {
+        showAlert('Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.', 'warning');
+        phoneInp?.focus();
+        return;
+      }
+
+      await triggerSendOtp(phone);
+    }
+
+    async function triggerSendOtp(phone) {
+      const btn = document.getElementById('btnSubmitLogin');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Sending OTP...';
+      }
+
+      try {
+        const response = await fetch('/api/customer/otp/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          activePhone = phone;
+          currentOtp = data.otp;
+          showOtpView(phone, data.customerName, data.otp, data.whatsappOtpUrl);
+        } else if (data.notRegistered) {
+          showAlert(
+            `Mobile number <strong>+91 ${phone}</strong> is not registered yet.<br>
+            <div style="margin-top: 8px;">
+              <button type="button" onclick="prefillRegister('${phone}')" class="btn-split-primary" style="padding: 8px 18px; font-size: 0.84rem; display: inline-flex; width: auto;">
+                Register Now →
+              </button>
+            </div>`,
+            'warning'
+          );
+        } else {
+          showAlert(data.message || 'Unable to send OTP. Please try again.', 'error');
+        }
+      } catch (err) {
+        console.error('Error sending OTP:', err);
+        showAlert('Failed to connect to authentication server. Please check your connection.', 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Login';
+        }
+      }
+    }
+
+    function prefillRegister(phone) {
+      showRegisterView();
+      const regPhoneInp = document.getElementById('regPhone');
+      if (regPhoneInp) regPhoneInp.value = phone;
+      document.getElementById('regName')?.focus();
+    }
+
+    // 2. Register Handler (Strict Validation for Name, Phone, City & Pincode)
+    async function handleRegisterSubmit(e) {
+      e.preventDefault();
+      clearAlert();
+
+      const nameInp = document.getElementById('regName');
+      const name = (nameInp?.value || '').trim();
+      const phoneInp = document.getElementById('regPhone');
+      const rawPhone = phoneInp?.value || '';
+      const cleanPhone = rawPhone.replace(/\D/g, '').slice(0, 10);
+      const addressInp = document.getElementById('regAddress');
+      const address = (addressInp?.value || '').trim();
+      const cityInp = document.getElementById('regCity');
+      const city = (cityInp?.value || '').trim();
+      const pinInp = document.getElementById('regPincode');
+      const pincode = (pinInp?.value || '').trim();
+
+      // 1. Full Name Validation: Letters only, min 2 chars, no numbers
+      if (!name) {
+        showAlert('Please enter your full name.', 'warning');
+        nameInp?.focus();
+        return;
+      }
+      if (name.length < 2) {
+        showAlert('Full Name must be at least 2 characters long.', 'warning');
+        nameInp?.focus();
+        return;
+      }
+      if (!/^[a-zA-Z\s.'-]+$/.test(name)) {
+        showAlert('Full Name must contain letters and spaces only. Numbers and symbols are not allowed.', 'warning');
+        nameInp?.focus();
+        return;
+      }
+
+      // 2. Mobile Number Validation: 10 numeric digits, starting with 6, 7, 8, or 9
+      if (!cleanPhone) {
+        showAlert('Please enter your 10-digit mobile number.', 'warning');
+        phoneInp?.focus();
+        return;
+      }
+      if (cleanPhone.length !== 10) {
+        showAlert('Mobile number must be exactly 10 digits.', 'warning');
+        phoneInp?.focus();
+        return;
+      }
+      if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
+        showAlert('Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9.', 'warning');
+        phoneInp?.focus();
+        return;
+      }
+
+      // 3. Delivery Address Validation
+      if (!address) {
+        showAlert('Please enter your delivery address.', 'warning');
+        addressInp?.focus();
+        return;
+      }
+      if (address.length < 5) {
+        showAlert('Please enter a complete delivery address (at least 5 characters).', 'warning');
+        addressInp?.focus();
+        return;
+      }
+
+      // 4. City Validation: Must be manually entered, letters only
+      if (!city) {
+        showAlert('Please enter your city or town name.', 'warning');
+        cityInp?.focus();
+        return;
+      }
+      if (city.length < 2 || !/^[a-zA-Z\s.'-]+$/.test(city)) {
+        showAlert('City should contain letters and spaces only (e.g. Ooty, Coimbatore, Chennai).', 'warning');
+        cityInp?.focus();
+        return;
+      }
+
+      // 5. Pincode Validation: Must be manually entered, exactly 6 digits
+      if (!pincode) {
+        showAlert('Please enter your 6-digit delivery pincode.', 'warning');
+        pinInp?.focus();
+        return;
+      }
+      if (!/^\d{6}$/.test(pincode)) {
+        showAlert('Pincode must be exactly 6 numeric digits (e.g. 643001).', 'warning');
+        pinInp?.focus();
+        return;
+      }
+
+      const btn = document.getElementById('btnSubmitRegister');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Registering...';
+      }
+
+      try {
+        const response = await fetch('/api/customer/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone: cleanPhone,
+            address,
+            city,
+            pincode
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          showRegisterSuccessModal({
+            customer: {
+              name,
+              phone: cleanPhone,
+              address,
+              city,
+              pincode
+            },
+            onProceed: () => {
+              showLoginView();
+              const loginInp = document.getElementById('loginPhoneInput');
+              if (loginInp) loginInp.value = cleanPhone;
+              activePhone = cleanPhone;
+              triggerSendOtp(cleanPhone);
+            }
+          });
+        } else if (data.alreadyRegistered) {
+          showRegisterSuccessModal({
+            customer: {
+              name,
+              phone: cleanPhone,
+              address,
+              city,
+              pincode
+            },
+            onProceed: () => {
+              showLoginView();
+              const loginInp = document.getElementById('loginPhoneInput');
+              if (loginInp) loginInp.value = cleanPhone;
+              activePhone = cleanPhone;
+              triggerSendOtp(cleanPhone);
+            }
+          });
+        } else {
+          showAlert(data.message || 'Registration failed. Please check your details.', 'error');
+        }
+      } catch (err) {
+        console.error('Registration error:', err);
+        showAlert('Network error while creating account. Please try again.', 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Register';
+        }
+      }
+    }
+
+    // Detect if running locally (localhost / 127.0.0.1 / local network)
+    const isLocalDev = window.location.hostname === 'localhost' || 
+                       window.location.hostname === '127.0.0.1' || 
+                       window.location.hostname === '' ||
+                       window.location.hostname.includes('192.168.') ||
+                       window.location.hostname.endsWith('.local') ||
+                       window.location.search.includes('dev=1');
+
+    // 3. OTP Step View
+    function showOtpView(phone, custName, otp, waUrl) {
+      activeView = 'otp';
+      currentOtp = otp;
+      document.getElementById('sectionLogin').style.display = 'none';
+      document.getElementById('sectionRegister').style.display = 'none';
+      document.getElementById('sectionOtp').style.display = 'block';
+
+      // Left Column update
+      document.getElementById('leftHeroTitle').textContent = 'Verify OTP';
+      document.getElementById('leftHeroSubtitle').textContent = `Enter the 4-digit code sent to +91 ${phone}`;
+
+      const dispPhone = document.getElementById('dispOtpPhone');
+      if (dispPhone) dispPhone.textContent = `+91 ${phone}`;
+      const dispPhoneCard = document.getElementById('dispOtpPhoneCard');
+      if (dispPhoneCard) dispPhoneCard.textContent = `+91 ${phone}`;
+
+      const waBtn = document.getElementById('btnWaDirectLink');
+      if (waBtn && waUrl) {
+        waBtn.href = waUrl;
+      }
+
+      // In Local Dev Mode: Show OTP banner & helper card with auto-fill
+      // In Live Production: Hide them automatically and let real WhatsApp / SMS deliver the OTP
+      if (isLocalDev) {
+        showLiveOtpToast(otp);
+        const localCard = document.getElementById('localOtpDisplayCard');
+        const localCodeSpan = document.getElementById('localOtpCodeNumber');
+        if (localCard && localCodeSpan) {
+          localCodeSpan.textContent = otp;
+          localCard.style.display = 'block';
+        }
+      } else {
+        hideLiveOtpToast();
+        const localCard = document.getElementById('localOtpDisplayCard');
+        if (localCard) localCard.style.display = 'none';
+
+        if (waUrl) {
+          try {
+            window.open(waUrl, '_blank');
+          } catch (e) {
+            console.warn('Popup blocked for WhatsApp OTP dispatch URL:', e);
+          }
+        }
+      }
+
+      console.log(`%c[OOTY HILLS GATEWAY] Dispatched OTP code to +91 ${phone}: ${otp}`, 'color: #2563eb; font-weight: bold;');
+
+      startResendCountdown(45);
+
+      const firstBox = document.getElementById('otpBox0');
+      if (firstBox) {
+        firstBox.value = '';
+        firstBox.focus();
+      }
+      for (let i = 1; i <= 3; i++) {
+        const box = document.getElementById('otpBox' + i);
+        if (box) box.value = '';
+      }
+    }
+
+    function autoFillOtpFromToast() {
+      if (!currentOtp || currentOtp.length !== 4) return;
+      for (let i = 0; i < 4; i++) {
+        const box = document.getElementById('otpBox' + i);
+        if (box) box.value = currentOtp[i];
+      }
+      document.getElementById('btnSubmitOtp')?.focus();
+    }
+
+    function showLiveOtpToast(otp) {
+      const toast = document.getElementById('liveOtpToast');
+      const codeSpan = document.getElementById('toastOtpCode');
+      if (toast && codeSpan) {
+        codeSpan.textContent = otp;
+        toast.style.display = 'flex';
+      }
+    }
+
+    function hideLiveOtpToast() {
+      const toast = document.getElementById('liveOtpToast');
+      if (toast) toast.style.display = 'none';
+    }
+
+    function returnFromOtp() {
+      hideLiveOtpToast();
+      clearInterval(countdownInterval);
+      showLoginView();
+    }
+
+    function setupOtpInputListeners() {
+      const boxes = [
+        document.getElementById('otpBox0'),
+        document.getElementById('otpBox1'),
+        document.getElementById('otpBox2'),
+        document.getElementById('otpBox3')
+      ];
+
+      boxes.forEach((box, idx) => {
+        if (!box) return;
+
+        box.addEventListener('input', (e) => {
+          const val = e.target.value.replace(/\D/g, '');
+          e.target.value = val ? val[0] : '';
+          if (val && idx < 3) {
+            boxes[idx + 1].focus();
+            boxes[idx + 1].select();
+          }
+        });
+
+        box.addEventListener('keydown', (e) => {
+          if (e.key === 'Backspace' && !box.value && idx > 0) {
+            boxes[idx - 1].focus();
+          }
+        });
+
+        box.addEventListener('paste', (e) => {
+          e.preventDefault();
+          const paste = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 4);
+          if (paste) {
+            for (let i = 0; i < paste.length; i++) {
+              if (boxes[i]) boxes[i].value = paste[i];
+            }
+            if (paste.length === 4) {
+              boxes[3].focus();
+              setTimeout(() => {
+                document.getElementById('formVerifyOtp')?.requestSubmit();
+              }, 200);
+            }
+          }
+        });
+      });
+    }
+
+    function startResendCountdown(seconds = 45) {
+      clearInterval(countdownInterval);
+      const timerSecs = document.getElementById('timerSecs');
+      const countdownText = document.getElementById('resendCountdownText');
+      const btnResend = document.getElementById('btnResendOtp');
+
+      if (countdownText) countdownText.style.display = 'inline';
+      if (btnResend) btnResend.style.display = 'none';
+
+      let remaining = seconds;
+      if (timerSecs) timerSecs.textContent = remaining;
+
+      countdownInterval = setInterval(() => {
+        remaining--;
+        if (timerSecs) timerSecs.textContent = remaining;
+        if (remaining <= 0) {
+          clearInterval(countdownInterval);
+          if (countdownText) countdownText.style.display = 'none';
+          if (btnResend) btnResend.style.display = 'inline';
+        }
+      }, 1000);
+    }
+
+    async function handleResendOtp() {
+      if (!activePhone) return;
+      await triggerSendOtp(activePhone);
+    }
+
+    async function handleVerifyOtpSubmit(e) {
+      e.preventDefault();
+      clearAlert();
+
+      const b0 = document.getElementById('otpBox0')?.value || '';
+      const b1 = document.getElementById('otpBox1')?.value || '';
+      const b2 = document.getElementById('otpBox2')?.value || '';
+      const b3 = document.getElementById('otpBox3')?.value || '';
+      const enteredOtp = `${b0}${b1}${b2}${b3}`.trim();
+
+      if (enteredOtp.length !== 4) {
+        showAlert('Please enter the complete 4-digit OTP code.', 'warning');
+        return;
+      }
+
+      const btn = document.getElementById('btnSubmitOtp');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Verifying...';
+      }
+
+      try {
+        const response = await fetch('/api/customer/otp/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: activePhone, otp: enteredOtp })
+        });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          hideLiveOtpToast();
+          clearInterval(countdownInterval);
+
+          localStorage.setItem('ooty_customer', JSON.stringify(data.customer));
+          checkActiveCustomerSession();
+
+          const urlParams = new URLSearchParams(window.location.search);
+          const redirectUrl = urlParams.get('redirect') || '/';
+
+          showLoginSuccessModal({
+            customer: data.customer,
+            redirectUrl: redirectUrl
+          });
+        } else {
+          showAlert(data.message || 'Incorrect OTP code. Please check and re-enter.', 'error');
+          for (let i = 0; i <= 3; i++) {
+            const box = document.getElementById('otpBox' + i);
+            if (box) box.value = '';
+          }
+          document.getElementById('otpBox0')?.focus();
+        }
+      } catch (err) {
+        console.error('Error verifying OTP:', err);
+        showAlert('Network error while verifying OTP. Please try again.', 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = 'Verify OTP & Access Account';
+        }
+      }
+    }
+  </script>
+</body>
+</html>

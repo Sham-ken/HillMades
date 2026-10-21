@@ -1,0 +1,132 @@
+[
+  {
+    "id": "CUST-3210",
+    "name": "Sham Sanjay",
+    "phone": "9876543210",
+    "address": "45 Nilgiri Pine View Road, Doddabetta Lane",
+    "city": "Ooty",
+    "pincode": "643002",
+    "landmark": "Near View Point",
+    "registeredAt": "2026-10-19T16:07:13.096Z",
+    "lastLoginAt": "2026-10-21T09:58:13.606Z",
+    "updatedAt": "2026-10-21T09:58:13.615Z"
+  },
+  {
+    "id": "CUST-6789",
+    "name": "Karthik Raja",
+    "phone": "9842156789",
+    "address": "No. 42, Green Valley Apartments, RS Puram",
+    "city": "Coimbatore",
+    "pincode": "641002",
+    "landmark": "Near Post Office",
+    "registeredAt": "2026-10-19T14:30:00.000Z"
+  },
+  {
+    "id": "CUST-2345",
+    "name": "Ananya Priya",
+    "phone": "9789012345",
+    "address": "15, Anna Nagar 3rd Cross Street",
+    "city": "Tiruppur",
+    "pincode": "641602",
+    "landmark": "Opposite CSI Church",
+    "registeredAt": "2026-10-19T17:15:00.000Z"
+  },
+  {
+    "id": "CUST-6789",
+    "name": "Priya Sharma",
+    "phone": "9123456789",
+    "address": "77 Coonoor Tea Estate Road",
+    "city": "Coonoor",
+    "pincode": "643101",
+    "landmark": "",
+    "registeredAt": "2026-10-20T11:32:50.701Z",
+    "lastLoginAt": "2026-10-21T09:58:13.637Z"
+  },
+  {
+    "id": "CUST-3006",
+    "name": "Kavitha Ramesh",
+    "phone": "9840113006",
+    "address": "15 Havelock Road, Near Rose Garden",
+    "city": "Ooty",
+    "pincode": "643001",
+    "landmark": "Opposite State Bank",
+    "registeredAt": "2026-10-20T11:44:23.481Z",
+    "lastLoginAt": "2026-10-20T11:44:23.530Z"
+  },
+  {
+    "id": "CUST-8268",
+    "name": "Sham Sanjay",
+    "phone": "9345738268",
+    "address": "zsddafbvafdbafbaedb",
+    "city": "Ooty",
+    "pincode": "643001",
+    "registeredAt": "2026-10-20T11:50:40.154Z",
+    "lastLoginAt": "2026-10-21T15:17:17.929Z"
+  },
+  {
+    "id": "CUST-2740",
+    "name": "Sham Sanjay",
+    "phone": "6374442740",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "Ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-10-20T18:08:47.164Z",
+    "lastLoginAt": "2026-10-20T18:08:55.065Z"
+  },
+  {
+    "id": "CUST-8262",
+    "name": "Sham Sanjay",
+    "phone": "9345738262",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "Ooty",
+    "pincode": "643001",
+    "landmark": "",
+    "registeredAt": "2026-10-20T18:14:43.776Z",
+    "lastLoginAt": "2026-10-21T09:02:11.464Z"
+  },
+  {
+    "id": "CUST-4930",
+    "name": "Kavitha Devi",
+    "phone": "9944844930",
+    "address": "42 Commercial Road, Upper Ooty",
+    "city": "Ooty",
+    "pincode": "643001",
+    "landmark": "",
+    "registeredAt": "2026-10-20T18:20:44.551Z",
+    "lastLoginAt": "2026-10-20T18:20:44.569Z"
+  },
+  {
+    "id": "CUST-9672",
+    "name": "srinath",
+    "phone": "7448449672",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-10-21T11:02:34.964Z",
+    "lastLoginAt": "2026-10-21T11:02:50.714Z"
+  },
+  {
+    "id": "CUST-8787",
+    "name": "sss",
+    "phone": "9787878787",
+    "address": "1/115 kenthorai village and post the nilgiri",
+    "city": "ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-10-21T14:43:28.372Z",
+    "lastLoginAt": "2026-10-21T14:43:44.397Z"
+  },
+  {
+    "id": "CUST-5998",
+    "name": "Sham",
+    "phone": "8445485998",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "ooty",
+    "pincode": "643001",
+    "landmark": "",
+    "registeredAt": "2026-10-21T15:40:35.619Z",
+    "lastLoginAt": "2026-10-21T15:40:56.392Z"
+  }
+]

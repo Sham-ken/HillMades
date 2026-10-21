@@ -1,0 +1,27 @@
+{
+  "name": "ooty-snacks-online",
+  "version": "1.0.0",
+  "description": "Full-stack Ooty specialty snacks e-commerce store with direct WhatsApp order routing and admin panel",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "ooty",
+    "varkey",
+    "chocolates",
+    "tea",
+    "snacks",
+    "ecommerce",
+    "whatsapp-order"
+  ],
+  "author": "Antigravity",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "morgan": "^1.10.1",
+    "multer": "^2.4.0"
+  }
+}

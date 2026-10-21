@@ -1,0 +1,899 @@
+/* =========================================================
+   OOTY HILLS - IT ENTERPRISE CUSTOMER PORTAL & AUTH CSS
+   Inspired by Stripe, Apple ID, Swiggy, & Amazon Modern Portals
+   ========================================================= */
+
+:root {
+  --portal-bg: #f8fafc;
+  --portal-card-bg: #ffffff;
+  --portal-text: #0f172a;
+  --portal-muted: #64748b;
+  --portal-border: #e2e8f0;
+  --portal-primary: #8b1a1a;
+  --portal-primary-hover: #701313;
+  --portal-primary-glow: rgba(139, 26, 26, 0.12);
+  --portal-success: #059669;
+  --portal-success-light: #ecfdf5;
+  --portal-wa: #25d366;
+  --portal-wa-hover: #1eb956;
+  --portal-gold: #c5a059;
+}
+
+body.account-portal-body {
+  background-color: var(--portal-bg);
+  color: var(--portal-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* ---------------- Top Portal Navigation Bar ---------------- */
+.portal-navbar {
+  background: #ffffff;
+  border-bottom: 1px solid var(--portal-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.portal-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.portal-brand-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.portal-logo-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #8b1a1a, #5c1111);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 12px rgba(139, 26, 26, 0.25);
+}
+
+.portal-brand-text h2 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #0f172a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.portal-brand-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 2px 7px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  border: 1px solid #e2e8f0;
+}
+
+.portal-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.portal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.portal-nav-btn.secondary {
+  background: #f8fafc;
+  color: #334155;
+  border: 1px solid var(--portal-border);
+}
+
+.portal-nav-btn.secondary:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.portal-nav-btn.primary {
+  background: var(--portal-primary);
+  color: #ffffff;
+  border: none;
+}
+
+.portal-nav-btn.primary:hover {
+  background: var(--portal-primary-hover);
+}
+
+/* ---------------- Main Portal Layout ---------------- */
+.portal-container {
+  max-width: 1200px;
+  margin: 28px auto 60px;
+  padding: 0 24px;
+}
+
+/* ---------------- Customer Header Profile Card ---------------- */
+.portal-profile-hero {
+  background: #ffffff;
+  border: 1px solid var(--portal-border);
+  border-radius: 16px;
+  padding: 26px 30px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.portal-profile-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #8b1a1a 0%, #c5a059 50%, #059669 100%);
+}
+
+.portal-user-meta-group {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.portal-avatar-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8b1a1a, #5c1111);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  box-shadow: 0 8px 16px rgba(139, 26, 26, 0.2);
+  flex-shrink: 0;
+  border: 3px solid #ffffff;
+}
+
+.portal-user-details h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.portal-verified-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--portal-success);
+  background: var(--portal-success-light);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.portal-user-contact {
+  font-size: 0.88rem;
+  color: var(--portal-muted);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.portal-user-contact span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Quick Metrics Row */
+.portal-metrics-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.portal-metric-card {
+  background: #f8fafc;
+  border: 1px solid var(--portal-border);
+  border-radius: 12px;
+  padding: 10px 18px;
+  text-align: center;
+  min-width: 110px;
+}
+
+.portal-metric-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  display: block;
+}
+
+.portal-metric-lbl {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--portal-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ---------------- Enterprise Segmented Navigation Tabs ---------------- */
+.portal-tabs-nav {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 5px;
+  gap: 4px;
+  margin-bottom: 24px;
+  border: 1px solid var(--portal-border);
+}
+
+.portal-tab-btn {
+  flex: 1;
+  padding: 12px 18px;
+  background: transparent;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.portal-tab-btn:hover {
+  color: #0f172a;
+}
+
+.portal-tab-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+}
+
+.portal-tab-count {
+  font-size: 0.74rem;
+  font-weight: 700;
+  background: #e2e8f0;
+  color: #334155;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.portal-tab-btn.active .portal-tab-count {
+  background: #f1f5f9;
+  color: var(--portal-primary);
+}
+
+/* ---------------- Tab Content Panels ---------------- */
+.portal-tab-content {
+  display: none;
+}
+
+.portal-tab-content.active {
+  display: block;
+  animation: portalFadeIn 0.25s ease-out;
+}
+
+@keyframes portalFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------- Orders Section (IT Logistics Standard) ---------------- */
+.portal-orders-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.portal-orders-search {
+  position: relative;
+  flex: 1;
+  max-width: 360px;
+}
+
+.portal-orders-search input {
+  width: 100%;
+  padding: 10px 14px 10px 38px;
+  background: #ffffff;
+  border: 1px solid var(--portal-border);
+  border-radius: 10px;
+  font-size: 0.88rem;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.portal-orders-search input:focus {
+  border-color: var(--portal-primary);
+  box-shadow: 0 0 0 3px var(--portal-primary-glow);
+}
+
+.portal-orders-search svg {
+  position: absolute;
+  left: 12px;
+  top: 11px;
+  width: 16px;
+  height: 16px;
+  color: #94a3b8;
+}
+
+/* Order Card Enterprise */
+.it-order-card {
+  background: #ffffff;
+  border: 1px solid var(--portal-border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+}
+
+.it-order-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.it-order-card-header {
+  background: #fafafa;
+  padding: 16px 22px;
+  border-bottom: 1px solid var(--portal-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.it-order-id-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.it-order-id-text {
+  font-family: monospace;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  background: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.it-order-date {
+  font-size: 0.82rem;
+  color: #64748b;
+}
+
+.it-order-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}
+
+.it-order-status-badge.pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.it-order-status-badge.confirmed {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.it-order-status-badge.dispatched {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+.it-order-status-badge.delivered {
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.it-order-status-badge .dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* IT Company Visual Progress Stepper */
+.it-stepper-container {
+  padding: 20px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.it-stepper-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.it-stepper-progress-bg {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+.it-stepper-progress-fill {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  height: 3px;
+  background: linear-gradient(90deg, #8b1a1a, #059669);
+  z-index: 2;
+  transition: width 0.4s ease;
+}
+
+.it-stepper-step {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.it-stepper-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.it-stepper-step.completed .it-stepper-node {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+.it-stepper-step.active .it-stepper-node {
+  background: var(--portal-primary);
+  border-color: var(--portal-primary);
+  color: #ffffff;
+  box-shadow: 0 0 0 4px var(--portal-primary-glow);
+}
+
+.it-stepper-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+}
+
+.it-stepper-step.completed .it-stepper-label,
+.it-stepper-step.active .it-stepper-label {
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* Order Items Table */
+.it-order-items-box {
+  padding: 16px 22px;
+}
+
+.it-order-item-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #f1f5f9;
+}
+
+.it-order-item-row:last-child {
+  border-bottom: none;
+}
+
+.it-item-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.it-item-info {
+  flex-grow: 1;
+}
+
+.it-item-name {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.it-item-meta {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.it-item-price {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* Order Footer Summary & Actions */
+.it-order-footer {
+  background: #fafafa;
+  border-top: 1px solid var(--portal-border);
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.it-order-shipping-summary {
+  font-size: 0.82rem;
+  color: #475569;
+  line-height: 1.45;
+  max-width: 420px;
+}
+
+.it-order-total-box {
+  text-align: right;
+}
+
+.it-order-grand-total {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--portal-primary);
+}
+
+.it-order-actions-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.it-btn-wa-live {
+  background: var(--portal-wa);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.it-btn-wa-live:hover {
+  background: var(--portal-wa-hover);
+  transform: translateY(-1px);
+}
+
+.it-btn-reorder {
+  background: #ffffff;
+  color: var(--portal-primary);
+  border: 1px solid var(--portal-primary);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.it-btn-reorder:hover {
+  background: #fcf4f4;
+}
+
+/* ---------------- Saved Address Card ---------------- */
+.it-address-card {
+  background: #ffffff;
+  border: 1px solid var(--portal-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  max-width: 600px;
+}
+
+.it-address-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.it-address-default-badge {
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+/* ---------------- Wishlist Grid ---------------- */
+.it-wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.it-wishlist-card {
+  background: #ffffff;
+  border: 1px solid var(--portal-border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.it-wishlist-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.it-wishlist-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: #f1f5f9;
+}
+
+.it-wishlist-body {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ---------------- Empty State Standard ---------------- */
+.it-empty-state {
+  background: #ffffff;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.it-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.it-empty-state h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.it-empty-state p {
+  font-size: 0.9rem;
+  color: #64748b;
+  max-width: 420px;
+  margin: 0 auto 20px;
+}
+
+/* ---------------- IT Enterprise Guest Auth Card (Sign In / Register) ---------------- */
+.it-auth-container {
+  max-width: 480px;
+  margin: 40px auto;
+  background: #ffffff;
+  border: 1px solid var(--portal-border);
+  border-radius: 20px;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+}
+
+.it-auth-top-bar {
+  height: 5px;
+  background: linear-gradient(90deg, #8b1a1a 0%, #c5a059 50%, #059669 100%);
+}
+
+.it-auth-card-body {
+  padding: 32px 30px;
+}
+
+.it-auth-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #8b1a1a;
+  background: #fcf4f4;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.6px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.it-auth-card-body h2 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.4px;
+  margin-bottom: 6px;
+}
+
+.it-auth-card-body p {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 22px;
+}
+
+/* Input group with icon */
+.it-input-group {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.it-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 13px;
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.it-input-control {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.it-input-control:focus {
+  background: #ffffff;
+  border-color: var(--portal-primary);
+  box-shadow: 0 0 0 4px var(--portal-primary-glow);
+}
+
+.it-btn-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--portal-primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(139, 26, 26, 0.25);
+  transition: all 0.2s;
+  margin-top: 10px;
+}
+
+.it-btn-submit:hover {
+  background: var(--portal-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(139, 26, 26, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .portal-nav-inner {
+    padding: 12px 16px;
+  }
+  .portal-container {
+    padding: 0 16px;
+    margin: 16px auto 40px;
+  }
+  .portal-profile-hero {
+    padding: 18px;
+  }
+  .portal-tabs-nav {
+    flex-wrap: wrap;
+  }
+  .portal-tab-btn {
+    font-size: 0.82rem;
+    padding: 8px 12px;
+  }
+  .it-stepper-label {
+    font-size: 0.65rem;
+  }
+}

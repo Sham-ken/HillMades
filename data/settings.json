@@ -1,0 +1,15 @@
+{
+  "storeName": "Ooty Hills Snack Corner",
+  "storeTagline": "Authentic Ooty Varkey, Homemade Chocolates, Tea & Coffee Direct to Your Doorstep",
+  "whatsappNumber": "919345738268",
+  "currency": "₹",
+  "currencyCode": "INR",
+  "adminPin": "1234",
+  "freeDeliveryThreshold": 500,
+  "standardDeliveryCharge": 40,
+  "upiId": "ootyhills@upi",
+  "businessAddress": "100% Online Store • Direct Mountain Dispatch, Ooty, The Nilgiris - 643001",
+  "supportEmail": "orders@ootyhills.com",
+  "fast2smsApiKey": "",
+  "isOpen": true
+}

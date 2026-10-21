@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wishlist | Ooty Hills Nilgiris Heritage</title>
+  <meta name="description" content="Save your favourite Nilgiris woodfired varkey, artisanal chocolates, and estate teas to your Ooty Hills wishlist.">
+  
+  <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
+</head>
+<body class="wishlist-page-body">
+
+  <!-- ==================== HEADER (EXACT OOTY HILLS BRANDING IN MENAGAII LUXURY LAYOUT) ==================== -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <!-- Ooty Hills Brand Logo -->
+        <a href="/" class="brand-logo" id="mainBrandLogo">
+          <svg class="brand-emblem" viewBox="0 0 100 100">
+            <path d="M50 12 C52 32 72 45 88 45 C72 55 62 76 50 88 C38 76 28 55 12 45 C28 45 48 32 50 12 Z" fill="none" stroke="currentColor" stroke-width="4.5"/>
+            <circle cx="50" cy="48" r="9" fill="currentColor"/>
+          </svg>
+          <div class="brand-text">
+            <h1>Ooty Hills</h1>
+            <span>Nilgiris Heritage</span>
+          </div>
+        </a>
+
+        <!-- Center Navigation Menu (With Collections) -->
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item">
+              <a href="/" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="/shop.html" class="nav-link">Shop</a>
+            </li>
+            <li class="nav-item">
+              <a href="/shop.html" class="nav-link">
+                Collections
+                <svg class="caret-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </a>
+              <div class="dropdown-menu">
+                <a href="/shop.html?cat=snacks">🥖 Ooty Varkey & Bakery</a>
+                <a href="/shop.html?cat=chocolates">🍫 Homemade Chocolates</a>
+                <a href="/shop.html?cat=beverages">☕ Estate Tea & Coffee</a>
+                <a href="/shop.html?cat=biscuits">🍪 Crispy Salt Biscuits</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a href="/about.html" class="nav-link">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="/wholesale.html" class="nav-link">Wholesale</a>
+            </li>
+            <li class="nav-item">
+              <a href="/contact.html" class="nav-link">Contact</a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Right Utility Icons (👤 ♡ 👜 🔍 Only - Clean Desktop Header) -->
+        <div class="header-actions">
+          <!-- 1. Account / Profile Icon with Dropdown -->
+          <div class="account-wrapper">
+            <button type="button" class="icon-btn" id="btnUserAccount" title="Account / Profile" aria-label="Account">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path></svg>
+            </button>
+
+            <!-- Luxury Dropdown Card -->
+            <div class="account-dropdown-card" id="accountDropdownCard">
+              <div class="account-card-header">
+                <div class="account-avatar-gold">
+                  <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <div class="account-header-info">
+                  <h4 id="accountHeaderName">My Account</h4>
+                  <span id="accountHeaderSub">Guest Customer</span>
+                </div>
+              </div>
+
+              <ul class="account-menu-list">
+                <li class="account-menu-item">
+                  <a href="/account" class="account-menu-link" style="color: var(--brand-primary); font-weight: 700; background: #fafaf9; border-bottom: 1px solid var(--border-light);">
+                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    <span>Full Customer Portal ↗</span>
+                  </a>
+                </li>
+                <li class="account-menu-item">
+                  <button type="button" class="account-menu-link" id="menuActionOrders">
+                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <span>My Orders</span>
+                  </button>
+                </li>
+                <li class="account-menu-item">
+                  <button type="button" class="account-menu-link" id="menuActionAddresses">
+                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    <span>My Addresses</span>
+                  </button>
+                </li>
+                <li class="account-menu-item">
+                  <a href="/wishlist" class="account-menu-link" id="menuActionWishlist">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <span>My Wishlist</span>
+                    <span class="menu-badge" id="menuWishlistCount" style="margin-left: auto; background: #fee2e2; color: #b91c1c; font-size: 0.72rem; font-weight: 700; padding: 1px 7px; border-radius: 99px; display: none;">0</span>
+                  </a>
+                </li>
+                <li class="account-menu-item">
+                  <button type="button" class="account-menu-link" id="menuActionCart">
+                    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <span>Shopping Cart</span>
+                  </button>
+                </li>
+                <li class="account-menu-item">
+                  <button type="button" class="account-menu-link login-row" id="menuActionAuth">
+                    <svg id="authRowIcon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                    <span id="authRowText">Login</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 2. Wishlist Heart Icon (Active highlight) -->
+          <a href="/wishlist" class="icon-btn active" id="btnWishlist" title="Wishlist" aria-label="Wishlist" style="color: var(--brand-primary);">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="cart-icon-badge" id="wishlistBadgeCount" style="display: none;">0</span>
+          </a>
+
+          <!-- 3. Shopping Bag Button -->
+          <button type="button" class="icon-btn" id="btnHeaderCart" title="Shopping Bag" aria-label="Cart">
+            <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+            <span class="cart-icon-badge" id="cartBadgeCount">0</span>
+          </button>
+
+          <!-- 4. Search Catalog Button -->
+          <button type="button" class="icon-btn" id="btnHeaderSearch" title="Search Catalog" aria-label="Search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN WISHLIST STAGE ==================== -->
+  <main class="wishlist-page-main" id="wishlistPageMain">
+    <div id="wishlistDynamicContainer" style="width: 100%;">
+      <!-- Rendered dynamically by JavaScript based on real customer session -->
+      <div class="wishlist-empty-stage">
+        <div class="wishlist-heart-icon-box">
+          <svg viewBox="0 0 24 24" class="wishlist-heart-outline">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+        </div>
+        <h2 class="wishlist-title">Your wishlist is empty</h2>
+        <p class="wishlist-subtitle" id="wishlistEmptySubtitleText">
+          Please login to save your favourite snacks & treats.
+        </p>
+        <div class="wishlist-actions" id="wishlistEmptyActionsContainer">
+          <button type="button" class="btn-wishlist-login-cta" id="btnPageWishlistLogin" onclick="handlePageWishlistLogin()">LOGIN</button>
+          <a href="/shop.html" class="btn-wishlist-explore-cta">EXPLORE COLLECTION</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER (ELEGANT LIGHT AESTHETIC - OOTY HILLS BRANDING) ==================== -->
+  <footer class="menagaii-light-footer">
+    <div class="menagaii-footer-grid">
+      <!-- Col 1: Ooty Hills Brand & Contact -->
+      <div class="menagaii-footer-brand-col">
+        <a href="/" class="brand-logo" style="margin-bottom: 6px;">
+          <svg class="brand-emblem" viewBox="0 0 100 100" style="width: 34px; height: 34px;">
+            <path d="M50 12 C52 32 72 45 88 45 C72 55 62 76 50 88 C38 76 28 55 12 45 C28 45 48 32 50 12 Z" fill="none" stroke="currentColor" stroke-width="4.5"/>
+            <circle cx="50" cy="48" r="9" fill="currentColor"/>
+          </svg>
+          <div class="brand-text">
+            <h1 style="font-size: 1.6rem; color: #7B181E;">Ooty Hills</h1>
+            <span style="font-size: 0.58rem; letter-spacing: 2px;">Nilgiris Heritage</span>
+          </div>
+        </a>
+        <p style="font-size: 0.82rem; color: #64748b; line-height: 1.5; margin: 4px 0 8px;">
+          Authentic woodfired Ooty varkey, homemade chocolates & high-grown estate teas direct to your doorstep.
+        </p>
+        <a href="mailto:orders@ootyhills.com" class="menagaii-footer-email">orders@ootyhills.com</a>
+        <span style="font-size: 0.8rem; color: #78716c; margin-top: 2px;">💬 WhatsApp: +91 93457 38268</span>
+      </div>
+
+      <!-- Col 2: Policies & Support -->
+      <div class="menagaii-footer-col">
+        <h4>Policies & Support</h4>
+        <ul>
+          <li><a href="javascript:void(0)" onclick="alert('Freshness Guarantee: Sealed in barrier aroma pouches right after woodfire baking.')">Freshness Guarantee</a></li>
+          <li><a href="javascript:void(0)" onclick="alert('Shipping Policy: Express Pan-India dispatch from Ooty within 24 hours.')">Shipping & Delivery</a></li>
+          <li><a href="javascript:void(0)" onclick="alert('Return Policy: 100% money-back or instant replacement for transit damages.')">Return & Refund Policy</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Our Links -->
+      <div class="menagaii-footer-col">
+        <h4>Our Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/shop.html">Shop Catalog</a></li>
+          <li><a href="/wholesale.html">Wholesale Bulk Orders</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Explore Us -->
+      <div class="menagaii-footer-col">
+        <h4>Explore Us</h4>
+        <ul>
+          <li><a href="/about.html">About Our Heritage</a></li>
+          <li><a href="/contact.html">Contact Us</a></li>
+          <li><a href="/account">Customer Portal</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 5: Our Community -->
+      <div class="menagaii-footer-col">
+        <h4>Our Community</h4>
+        <div class="menagaii-social-row">
+          <a href="https://facebook.com" target="_blank" class="menagaii-social-btn fb" title="Facebook" aria-label="Facebook">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.667 5H18V0h-3.808C10.595 0 9 1.582 9 4.615V8z"/></svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" class="menagaii-social-btn ig" title="Instagram" aria-label="Instagram">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="https://youtube.com" target="_blank" class="menagaii-social-btn yt" title="YouTube" aria-label="YouTube">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 1200px; margin: 30px auto 0; padding: 20px 20px 0; border-top: 1px solid rgba(0,0,0,0.06); text-align: center; font-size: 0.8rem; color: #8c827a;">
+      <p>&copy; 2026 Ooty Hills Snacks & Chocolates. Nilgiris Heritage. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Common Cart Drawer -->
+  <div class="cart-drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Bag">
+    <div class="cart-drawer-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <h3>Your Shopping Bag</h3>
+        <span class="veg-badge-mini" title="100% Pure Veg"><span class="veg-dot"></span></span>
+      </div>
+      <button type="button" class="btn-close-drawer" id="closeCartBtn">✕</button>
+    </div>
+    <div class="free-shipping-progress-box" id="cartFreeShippingBox">
+      <div class="progress-label" id="cartFreeShippingLabel">Add ₹140 more to get FREE Pan-India Delivery!</div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="cartFreeShippingBar" style="width: 70%;"></div>
+      </div>
+    </div>
+    <div class="cart-items-list" id="cartItemsContainer"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-summary-line">
+        <span>Subtotal</span>
+        <span id="cartSubtotal" style="font-weight: 700;">₹0</span>
+      </div>
+      <div class="cart-summary-line">
+        <span>Express Delivery Fee</span>
+        <span id="cartDelivery">₹40</span>
+      </div>
+      <div class="cart-summary-line total-line">
+        <span>Total Amount</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <button type="button" class="btn-checkout-whatsapp" id="proceedToCheckoutBtn">
+        <span>💬</span> Complete Order via WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- Search Modal -->
+  <div class="modal-overlay" id="searchModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Search Catalog</h3>
+        <button type="button" class="btn-close-drawer btn-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="globalSearchInput" class="form-control" placeholder="Search Varkey, Chocolates, Tea..." autofocus>
+        <div id="searchResultList" style="margin-top: 16px; max-height: 300px; overflow-y: auto;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Standard Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Delivery & Dispatch Details</h3>
+        <button type="button" class="btn-close-drawer btn-modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="checkoutForm">
+          <div class="form-group">
+            <label class="form-label" for="custName">Full Name *</label>
+            <input type="text" id="custName" class="form-control" placeholder="e.g. Sham Sanjay" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="custPhone">WhatsApp Mobile Number *</label>
+            <input type="tel" id="custPhone" class="form-control" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="custAddress">Complete Delivery Address *</label>
+            <textarea id="custAddress" class="form-control" rows="2" placeholder="House/Flat number, Street, Area" required></textarea>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="form-group">
+              <label class="form-label" for="custCity">City / Town *</label>
+              <input type="text" id="custCity" class="form-control" placeholder="e.g. Coimbatore" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="custPincode">Pincode *</label>
+              <input type="text" id="custPincode" class="form-control" placeholder="e.g. 643001" pattern="[0-9]{6}" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-checkout-whatsapp" style="width: 100%; margin-top: 10px; padding: 14px;">
+            <span>💬</span> Confirm & Send Order to WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/app.js"></script>
+
+  <!-- Dedicated Wishlist Page Logic -->
+  <script>
+    function renderDedicatedWishlistPage() {
+      const container = document.getElementById('wishlistDynamicContainer');
+      if (!container) return;
+
+      const items = (typeof storeState !== 'undefined' && storeState.products)
+        ? storeState.products.filter(p => storeState.wishlist && storeState.wishlist.includes(p.id))
+        : [];
+
+      const isLoggedIn = Boolean(typeof storeState !== 'undefined' && storeState.customer);
+
+      // If items exist in wishlist, render populated items matching Reference Image 1
+      if (items.length > 0) {
+        container.innerHTML = `
+          <div class="wishlist-populated-wrapper">
+            <h1 class="wishlist-page-heading">My Wishlist</h1>
+            <div class="wishlist-items-count">${items.length} ${items.length === 1 ? 'items' : 'items'} saved</div>
+            <a href="/shop.html" class="btn-wishlist-continue">CONTINUE SHOPPING &rarr;</a>
+
+            <div class="wishlist-horizontal-list">
+              ${items.map(p => {
+                let cat = 'NILGIRIS HERITAGE';
+                const nameLower = (p.name || '').toLowerCase();
+                if (nameLower.includes('varkey')) cat = 'WOODFIRED BAKERY';
+                else if (nameLower.includes('choco')) cat = 'HOMEMADE CHOCOLATES';
+                else if (nameLower.includes('tea') || nameLower.includes('coffee')) cat = 'ESTATE BEVERAGES';
+                else if (nameLower.includes('biscuit')) cat = 'CRISPY BAKERY';
+
+                return `
+                  <div class="wishlist-row-card">
+                    <div class="wishlist-row-left">
+                      <img src="${p.image || '/images/varkey.jpg'}" alt="${p.name}" class="wishlist-row-img" onerror="this.src='/images/varkey.jpg'">
+                      <div class="wishlist-row-info">
+                        <span class="wishlist-row-cat">${cat}</span>
+                        <h3 class="wishlist-row-title">${p.name}</h3>
+                        <div class="wishlist-row-price">₹${p.price.toLocaleString('en-IN')}</div>
+                      </div>
+                    </div>
+                    <div class="wishlist-row-actions">
+                      <button type="button" class="btn-wishlist-go-cart" onclick="handleWishlistGoToCart('${p.id}')">
+                        <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+                        <span>GO TO CART</span>
+                      </button>
+                      <button type="button" class="btn-wishlist-delete-trash" onclick="toggleWishlist('${p.id}', event); renderDedicatedWishlistPage();" title="Remove from Wishlist" aria-label="Delete">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
+                          <polyline points="3 6 5 6 21 6"></polyline>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      // EMPTY WISHLIST STATE - ADAPTED FOR OOTY HILLS
+      if (!isLoggedIn) {
+        // STATE 1: WITHOUT LOGIN (Reference Screenshot 1)
+        container.innerHTML = `
+          <div class="wishlist-empty-stage">
+            <div class="wishlist-heart-icon-box">
+              <svg viewBox="0 0 24 24" class="wishlist-heart-outline">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <h2 class="wishlist-title">Your wishlist is empty</h2>
+            <p class="wishlist-subtitle">Please login to save your favourite snacks & treats.</p>
+            <div class="wishlist-actions">
+              <button type="button" class="btn-wishlist-login-cta" id="btnPageWishlistLogin" onclick="handlePageWishlistLogin()">LOGIN</button>
+              <a href="/shop.html" class="btn-wishlist-explore-cta">EXPLORE COLLECTION</a>
+            </div>
+          </div>
+        `;
+      } else {
+        // STATE 2: WITH LOGIN (Reference Screenshot 2)
+        container.innerHTML = `
+          <div class="wishlist-empty-stage">
+            <div class="wishlist-heart-icon-box">
+              <svg viewBox="0 0 24 24" class="wishlist-heart-outline">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+            <h2 class="wishlist-title">Your wishlist is empty</h2>
+            <p class="wishlist-subtitle">Save your favourite snacks and teas here and come back to them anytime.</p>
+            <div class="wishlist-actions">
+              <a href="/shop.html" class="btn-wishlist-explore-cta">EXPLORE COLLECTION</a>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function handleWishlistGoToCart(productId) {
+      if (typeof addToCart === 'function') {
+        addToCart(productId);
+      }
+      window.location.href = '/cart';
+    }
+
+    function handlePageWishlistLogin() {
+      if (typeof openCustomerAuthModal === 'function') {
+        openCustomerAuthModal('login');
+      } else {
+        window.location.href = '/login.html?redirect=/wishlist';
+      }
+    }
+
+    function clearEntireWishlist() {
+      if (confirm('Clear all items from your wishlist?')) {
+        if (typeof storeState !== 'undefined') {
+          storeState.wishlist = [];
+          localStorage.setItem('ooty_wishlist', JSON.stringify([]));
+          if (typeof updateWishlistUI === 'function') updateWishlistUI();
+        }
+        renderDedicatedWishlistPage();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(renderDedicatedWishlistPage, 80);
+    });
+  </script>
+</body>
+</html>
