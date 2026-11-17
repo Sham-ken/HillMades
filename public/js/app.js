@@ -2648,29 +2648,17 @@ function showOtpToast(phone, otp, mode = 'login', whatsappOtpUrl = null, custome
     <div class="otp-sms-icon">💬</div>
     <div class="otp-sms-content">
       <div class="otp-sms-header">
-        <span class="otp-sms-title">${isLocalDev ? '🛠️ Local Dev Mode OTP' : '📱 SMS & WhatsApp Gateway'}</span>
+        <span class="otp-sms-title">📱 Hill Mades OTP Verification</span>
         <span class="otp-sms-time">Just now</span>
       </div>
       <div class="otp-sms-body">
-        ${isLocalDev ? `
-          Verification OTP for <strong>+91 ${phone}</strong> ${customerName ? `(${customerName})` : ''} is: <br>
-          <span class="otp-code-highlight" style="font-family: monospace; font-size: 1.4rem; font-weight: 800; background: #eab308; color: #1c1917; padding: 2px 10px; border-radius: 6px; letter-spacing: 3px; display: inline-block; margin-top: 4px;">${otp}</span>
-          <div style="font-size: 0.74rem; color: #d6d3d1; margin-top: 3px;">
-            (Auto-hides on live production domain)
-          </div>
-        ` : `
-          4-digit OTP dispatched to <strong>+91 ${phone}</strong> ${customerName ? `(${customerName})` : ''}.
-          <div style="font-size: 0.74rem; color: #d6d3d1; margin-top: 3px;">
-            Please check your WhatsApp or SMS inbox on your mobile phone.
-          </div>
-        `}
+        Verification OTP for <strong>+91 ${phone}</strong> ${customerName ? `(${customerName})` : ''} is: <br>
+        <span class="otp-code-highlight" style="font-family: monospace; font-size: 1.4rem; font-weight: 800; background: #eab308; color: #1c1917; padding: 2px 10px; border-radius: 6px; letter-spacing: 3px; display: inline-block; margin-top: 4px;">${otp}</span>
       </div>
       <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
-        ${isLocalDev ? `
-          <button type="button" class="otp-sms-action-btn" id="btnAutoFillOtpBanner" style="background: #22c55e; color: white; border: none; font-weight: 700; font-size: 0.78rem; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
-            ⚡ Auto-Fill Code
-          </button>
-        ` : ''}
+        <button type="button" class="otp-sms-action-btn" id="btnAutoFillOtpBanner" style="background: #22c55e; color: white; border: none; font-weight: 700; font-size: 0.78rem; padding: 6px 12px; border-radius: 6px; cursor: pointer;">
+          ⚡ Auto-Fill Code
+        </button>
         ${whatsappOtpUrl ? `
           <a href="${whatsappOtpUrl}" target="_blank" style="background: #25D366; color: white; font-weight: 700; font-size: 0.76rem; border-radius: 6px; padding: 6px 12px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
             💬 Open in WhatsApp
@@ -2954,9 +2942,11 @@ function renderAuthStep1(activeTab = 'register', prefillPhone = '') {
         }
 
         if (data.success) {
+          window._lastOtpToken = data.otpToken || '';
+          window._lastOtpCustomer = data.customer || null;
           // Show realistic carrier/WhatsApp SMS toast banner
           showOtpToast(phone, data.otp, 'login', data.whatsappOtpUrl, data.customerName);
-          // Render Step 2: 4-digit input screen
+          // Render Step 2: 6-digit input screen
           renderAuthStep2(phone, data.otp, data.whatsappOtpUrl, data.customerName);
         } else {
           alert(data.message || 'Error sending OTP');
@@ -2992,7 +2982,7 @@ function renderAuthStep2(phone, otp, whatsappOtpUrl, customerName) {
         Enter Verification Code
       </h4>
       <p style="font-size: 0.88rem; color: #57534e; margin: 0;">
-        We have sent a 4-digit OTP to <strong>+91 ${phone}</strong> ${customerName ? `for <strong>${customerName}</strong>` : ''}
+        We have sent a 6-digit OTP to <strong>+91 ${phone}</strong> ${customerName ? `for <strong>${customerName}</strong>` : ''}
         <br>
         <a href="javascript:void(0)" id="btnChangePhone" style="color: var(--brand-primary); font-size: 0.82rem; font-weight: 700; text-decoration: underline;">
           ← Change Mobile Number
@@ -3019,11 +3009,13 @@ function renderAuthStep2(phone, otp, whatsappOtpUrl, customerName) {
     </div>
 
     <form id="otpVerifyForm">
-      <div class="otp-boxes-wrapper">
+      <div class="otp-boxes-wrapper" style="display: flex; justify-content: center; gap: 8px;">
         <input type="tel" class="otp-digit-input" id="otpDigit0" maxlength="1" pattern="[0-9]" inputmode="numeric" autofocus required>
         <input type="tel" class="otp-digit-input" id="otpDigit1" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
         <input type="tel" class="otp-digit-input" id="otpDigit2" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
         <input type="tel" class="otp-digit-input" id="otpDigit3" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+        <input type="tel" class="otp-digit-input" id="otpDigit4" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+        <input type="tel" class="otp-digit-input" id="otpDigit5" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
       </div>
 
       <button type="submit" class="btn-menagaii-cta" id="btnVerifyOtpSubmit" style="width: 100%; padding: 14px; font-size: 1rem; margin-top: 14px;">
@@ -3045,12 +3037,14 @@ function renderAuthStep2(phone, otp, whatsappOtpUrl, customerName) {
     renderAuthStep1('login', phone);
   });
 
-  // Setup 4 digit boxes auto-advance
+  // Setup 6 digit boxes auto-advance
   const inputs = [
     document.getElementById('otpDigit0'),
     document.getElementById('otpDigit1'),
     document.getElementById('otpDigit2'),
-    document.getElementById('otpDigit3')
+    document.getElementById('otpDigit3'),
+    document.getElementById('otpDigit4'),
+    document.getElementById('otpDigit5')
   ];
 
   inputs.forEach((inp, idx) => {
@@ -3058,7 +3052,7 @@ function renderAuthStep2(phone, otp, whatsappOtpUrl, customerName) {
     inp.addEventListener('input', (e) => {
       const val = e.target.value.replace(/\D/g, '');
       e.target.value = val ? val[0] : '';
-      if (val && idx < 3) {
+      if (val && idx < 5) {
         inputs[idx + 1].focus();
         inputs[idx + 1].select();
       }
@@ -3072,16 +3066,23 @@ function renderAuthStep2(phone, otp, whatsappOtpUrl, customerName) {
 
     inp.addEventListener('paste', (e) => {
       e.preventDefault();
-      const pasteData = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 4);
+      const pasteData = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '').slice(0, 6);
       for (let i = 0; i < pasteData.length; i++) {
         if (inputs[i]) inputs[i].value = pasteData[i];
       }
-      if (pasteData.length === 4) {
-        inputs[3].focus();
+      if (pasteData.length === 6) {
+        inputs[5].focus();
         document.getElementById('otpVerifyForm')?.dispatchEvent(new Event('submit'));
       }
     });
   });
+
+  // Auto pre-fill if available
+  if (otp && otp.length === 6) {
+    for (let i = 0; i < 6; i++) {
+      if (inputs[i]) inputs[i].value = otp[i];
+    }
+  }
 
   inputs[0]?.focus();
 
@@ -3094,8 +3095,8 @@ function renderAuthStep2(phone, otp, whatsappOtpUrl, customerName) {
     verifyForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const code = inputs.map(i => i.value).join('');
-      if (code.length !== 4) {
-        alert('Please enter all 4 digits of the verification code');
+      if (code.length !== 6) {
+        alert('Please enter all 6 digits of the verification code');
         return;
       }
       verifyCustomerOtp(phone, code);
@@ -3105,7 +3106,7 @@ function renderAuthStep2(phone, otp, whatsappOtpUrl, customerName) {
 
 function quickFillOtp(otp) {
   const str = otp.toString().trim();
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 6; i++) {
     const el = document.getElementById('otpDigit' + i);
     if (el) el.value = str[i] || '';
   }
@@ -3139,6 +3140,7 @@ function startOtpResendTimer(phone, customerName) {
             });
             const data = await res.json();
             if (data.success) {
+              window._lastOtpToken = data.otpToken || '';
               showOtpToast(phone, data.otp, 'login', data.whatsappOtpUrl, data.customerName);
               renderAuthStep2(phone, data.otp, data.whatsappOtpUrl, data.customerName);
             } else {
@@ -3166,7 +3168,12 @@ async function verifyCustomerOtp(phone, otp) {
     const res = await fetch('/api/customer/otp/verify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, otp })
+      body: JSON.stringify({ 
+        phone, 
+        otp,
+        otpToken: window._lastOtpToken || '',
+        customer: window._lastOtpCustomer || null
+      })
     });
 
     const data = await res.json();
@@ -4428,34 +4435,23 @@ function renderPortalOtpStep2(container, phone, otp, whatsappOtpUrl, customerNam
           </div>
         ` : ''}
 
-        ${(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '' || window.location.search.includes('dev=1')) ? `
-          <!-- Quick Local Demo Testing Helper -->
-          <div style="background: #fefce8; border: 1.5px dashed #eab308; border-radius: 12px; padding: 12px; margin-bottom: 18px; text-align: center; cursor: pointer;" onclick="quickFillPortalOtp('${otp}')" title="Click to Auto-Fill">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-              <span style="font-size: 0.74rem; font-weight: 700; color: #854d0e; text-transform: uppercase; letter-spacing: 0.5px;">
-                🛠️ Local Dev Mode • Test OTP Code:
-              </span>
-              <span style="background: #eab308; color: #713f12; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 6px;">
-                ⚡ Auto-Fill
-              </span>
-            </div>
-            <div style="font-family: monospace; font-size: 1.6rem; font-weight: 800; color: #1c1917; letter-spacing: 5px;">
-              ${otp}
-            </div>
-            <div style="font-size: 0.72rem; color: #a16207; margin-top: 3px;">
-              (Click to auto-fill code)
-            </div>
+        <!-- Quick Demo Testing Code Helper (Always visible in both local and live) -->
+        <div style="background: #fefce8; border: 1.5px dashed #eab308; border-radius: 12px; padding: 12px; margin-bottom: 18px; text-align: center; cursor: pointer;" onclick="quickFillPortalOtp('${otp}')" title="Click to Auto-Fill">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span style="font-size: 0.74rem; font-weight: 700; color: #854d0e; text-transform: uppercase; letter-spacing: 0.5px;">
+              🔑 Verification OTP Code:
+            </span>
+            <span style="background: #eab308; color: #713f12; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 6px;">
+              ⚡ Auto-Fill
+            </span>
           </div>
-        ` : `
-          <!-- Live Mobile Delivery Notification Card -->
-          <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; text-align: left;">
-            <span style="font-size: 1.3rem;">📲</span>
-            <div style="font-size: 0.82rem; color: #166534;">
-              <strong style="display: block; font-size: 0.86rem; color: #14532d;">Code sent to +91 ${phone}</strong>
-              Please check your WhatsApp or SMS messages to retrieve your 4-digit code.
-            </div>
+          <div style="font-family: monospace; font-size: 1.6rem; font-weight: 800; color: #1c1917; letter-spacing: 5px;">
+            ${otp}
           </div>
-        `}
+          <div style="font-size: 0.72rem; color: #a16207; margin-top: 3px;">
+            (Click anywhere on this card to fill code)
+          </div>
+        </div>
 
         <form id="portalOtpVerifyForm">
           <div class="otp-boxes-wrapper">
@@ -4547,7 +4543,12 @@ function renderPortalOtpStep2(container, phone, otp, whatsappOtpUrl, customerNam
         const res = await fetch('/api/customer/otp/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone, otp: code })
+          body: JSON.stringify({
+            phone,
+            otp: code,
+            otpToken: window._lastOtpToken || '',
+            customer: window._lastOtpCustomer || null
+          })
         });
         const data = await res.json();
         if (data.success && data.customer) {

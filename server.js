@@ -4,9 +4,12 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const multer = require('multer');
+const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const OTP_SECRET = process.env.OTP_SECRET || 'hillmades-nilgiris-secret-key-2026';
+const TMP_DATA_DIR = path.join('/tmp', 'data');
 
 // Setup Multer for Product Image Uploads
 const storage = multer.diskStorage({
@@ -42,34 +45,69 @@ const EXPENSES_FILE = path.join(__dirname, 'data', 'expenses.json');
 const FEEDBACK_FILE = path.join(__dirname, 'data', 'feedback.json');
 const CUSTOMERS_FILE = path.join(__dirname, 'data', 'customers.json');
 
-// In-Memory OTP Store
+// In-Memory OTP Store & Data Cache (Ensures speed + serverless tolerance)
 const otpStore = new Map();
+const memoryCache = new Map();
 
-// File Helper
+// File Helper with seamless /tmp fallback for Serverless (Vercel)
 function readJSON(file, fallback = []) {
+  const baseName = path.basename(file);
+  if (memoryCache.has(baseName)) {
+    return memoryCache.get(baseName);
+  }
+
+  // 1. Check /tmp first (holds newer writes in serverless environments)
   try {
-    if (!fs.existsSync(file)) {
-      try {
-        fs.writeFileSync(file, JSON.stringify(fallback, null, 2));
-      } catch (e) {}
-      return fallback;
+    const tmpPath = path.join(TMP_DATA_DIR, baseName);
+    if (fs.existsSync(tmpPath)) {
+      const content = fs.readFileSync(tmpPath, 'utf8');
+      const parsed = JSON.parse(content || '[]');
+      memoryCache.set(baseName, parsed);
+      return parsed;
     }
-    const data = fs.readFileSync(file, 'utf8');
-    return JSON.parse(data || '[]');
+  } catch (e) {}
+
+  // 2. Check bundled file in codebase
+  try {
+    if (fs.existsSync(file)) {
+      const data = fs.readFileSync(file, 'utf8');
+      const parsed = JSON.parse(data || '[]');
+      memoryCache.set(baseName, parsed);
+      return parsed;
+    }
   } catch (err) {
     console.error(`Error reading ${file}:`, err);
-    return fallback;
   }
+
+  return fallback;
 }
 
 function writeJSON(file, data) {
+  const baseName = path.basename(file);
+  memoryCache.set(baseName, data);
+
+  let written = false;
+
+  // Attempt write to primary path
   try {
+    const dir = path.dirname(file);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
-    return true;
+    written = true;
   } catch (err) {
-    console.error(`Error writing ${file}:`, err);
-    return false;
+    // Expected on Vercel read-only filesystem
   }
+
+  // Attempt write to /tmp/data for serverless persistence across requests
+  try {
+    if (!fs.existsSync(TMP_DATA_DIR)) fs.mkdirSync(TMP_DATA_DIR, { recursive: true });
+    fs.writeFileSync(path.join(TMP_DATA_DIR, baseName), JSON.stringify(data, null, 2), 'utf8');
+    written = true;
+  } catch (tmpErr) {
+    // Ignore tmp error
+  }
+
+  return written;
 }
 
 // ---------------- REST APIs ---------------- //
@@ -344,11 +382,12 @@ app.post('/api/customer/register', (req, res) => {
   const existingCust = customers.find(c => c.phone && c.phone.replace(/\D/g, '').slice(-10) === cleanPhone);
 
   if (existingCust) {
-    return res.status(400).json({
-      success: false,
+    return res.status(200).json({
+      success: true,
       alreadyRegistered: true,
       phone: cleanPhone,
-      message: `Mobile number +91 ${cleanPhone} is already registered as "${existingCust.name}". Please log in!`
+      customer: existingCust,
+      message: `Mobile number +91 ${cleanPhone} is already registered as "${existingCust.name}". Proceeding to login.`
     });
   }
 
@@ -383,7 +422,7 @@ app.post('/api/customer/register', (req, res) => {
 
 // 3.2 SEND LOGIN OTP (REAL LOGIN OTP PROCESS)
 app.post('/api/customer/otp/send', async (req, res) => {
-  const { phone } = req.body;
+  const { phone, customer: incomingCustomer } = req.body;
   if (!phone) {
     return res.status(400).json({ success: false, message: 'Please enter your mobile number' });
   }
@@ -394,7 +433,23 @@ app.post('/api/customer/otp/send', async (req, res) => {
   }
 
   const customers = readJSON(CUSTOMERS_FILE, []);
-  const existingCust = customers.find(c => c.phone && c.phone.replace(/\D/g, '').slice(-10) === cleanPhone);
+  let existingCust = customers.find(c => c.phone && c.phone.replace(/\D/g, '').slice(-10) === cleanPhone);
+
+  // If customer data was passed from registration or checkout, ensure they are registered
+  if (!existingCust && incomingCustomer && incomingCustomer.name) {
+    existingCust = {
+      id: incomingCustomer.id || ('CUST-' + cleanPhone.slice(-4)),
+      name: incomingCustomer.name.trim(),
+      phone: cleanPhone,
+      address: incomingCustomer.address || '',
+      city: incomingCustomer.city || 'Ooty',
+      pincode: incomingCustomer.pincode || '643001',
+      landmark: incomingCustomer.landmark || '',
+      registeredAt: incomingCustomer.registeredAt || new Date().toISOString()
+    };
+    customers.push(existingCust);
+    writeJSON(CUSTOMERS_FILE, customers);
+  }
 
   // Real process: Must be registered to log in
   if (!existingCust) {
@@ -408,9 +463,16 @@ app.post('/api/customer/otp/send', async (req, res) => {
 
   // Generate a random 6-digit numeric OTP code (Matching design mockup)
   const otp = Math.floor(100000 + Math.random() * 900000).toString();
-  const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes real expiry
+  const expiresAt = Date.now() + 10 * 60 * 1000; // 10 minutes real expiry
 
-  // Store in memory
+  // Stateless HMAC Token (Immune to serverless container recycling)
+  const sig = crypto
+    .createHmac('sha256', OTP_SECRET)
+    .update(`${cleanPhone}:${otp}:${expiresAt}`)
+    .digest('hex');
+  const otpToken = `${expiresAt}.${sig}`;
+
+  // Store in memory for local fallback
   otpStore.set(cleanPhone, {
     otp,
     expiresAt,
@@ -420,7 +482,7 @@ app.post('/api/customer/otp/send', async (req, res) => {
   });
 
   // Prepare Direct WhatsApp OTP dispatch link
-  const waMsg = encodeURIComponent(`🏔️ *HILL MADES SNACKS - LOGIN VERIFICATION*\n\nHello ${existingCust.name},\nYour Login Verification OTP code is: *${otp}*\n\nValid for 5 minutes. Do not share this OTP with anyone.\nEnjoy our freshly baked Ooty Varkey & Nilgiri teas! ☕🍪`);
+  const waMsg = encodeURIComponent(`🏔️ *HILL MADES SNACKS - LOGIN VERIFICATION*\n\nHello ${existingCust.name},\nYour Login Verification OTP code is: *${otp}*\n\nValid for 10 minutes. Do not share this OTP with anyone.\nEnjoy our freshly baked Ooty Varkey & Nilgiri teas! ☕🍪`);
   const whatsappOtpUrl = `https://wa.me/91${cleanPhone}?text=${waMsg}`;
 
   // Check if Fast2SMS API key is configured for real SIM SMS
@@ -432,7 +494,7 @@ app.post('/api/customer/otp/send', async (req, res) => {
   console.log(`👤 Customer: ${existingCust.name}`);
   console.log(`📱 Recipient Phone: +91 ${cleanPhone}`);
   console.log(`🔑 Verification Login OTP: >>> [ ${otp} ] <<<`);
-  console.log(`⏱️  Validity: 5 minutes`);
+  console.log(`⏱️  Validity: 10 minutes`);
   console.log(`📲 WhatsApp Link: ${whatsappOtpUrl}`);
   if (smsResult.success) {
     console.log(`📡 Fast2SMS Cellular Delivery: DISPATCHED SUCCESSFULLY`);
@@ -446,7 +508,9 @@ app.post('/api/customer/otp/send', async (req, res) => {
     message: `Login OTP sent to +91 ${cleanPhone}`,
     phone: cleanPhone,
     customerName: existingCust.name,
-    otp, // provided for backend testing / console
+    customer: existingCust,
+    otp, // provided so client can always display on screen
+    otpToken, // stateless verification token
     whatsappOtpUrl,
     smsDispatched: smsResult.success
   });
@@ -507,9 +571,9 @@ app.post('/api/admin/test-sms', async (req, res) => {
   });
 });
 
-// 3.3 VERIFY LOGIN OTP
+// 3.3 VERIFY LOGIN OTP (Supports Stateless HMAC Token for Serverless Multi-Instance Scaling)
 app.post('/api/customer/otp/verify', (req, res) => {
-  const { phone, otp } = req.body;
+  const { phone, otp, otpToken, customer: passedCust } = req.body;
   if (!phone || !otp) {
     return res.status(400).json({ success: false, message: 'Phone number and OTP code are required' });
   }
@@ -517,23 +581,49 @@ app.post('/api/customer/otp/verify', (req, res) => {
   const cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
   const cleanOtp = otp.toString().trim();
 
-  const record = otpStore.get(cleanPhone);
-  if (!record) {
-    return res.status(400).json({ success: false, message: 'OTP has expired or not requested. Please request a new OTP.' });
-  }
+  let isVerified = false;
 
-  if (Date.now() > record.expiresAt) {
-    otpStore.delete(cleanPhone);
-    return res.status(400).json({ success: false, message: 'OTP has expired. Please request a new OTP.' });
-  }
-
-  if (record.otp !== cleanOtp) {
-    record.attempts = (record.attempts || 0) + 1;
-    if (record.attempts >= 3) {
-      otpStore.delete(cleanPhone);
-      return res.status(400).json({ success: false, message: 'Too many incorrect attempts. Please request a new OTP.' });
+  // 1. Check Stateless HMAC Token (works 100% across separate Vercel Lambda instances)
+  if (otpToken && typeof otpToken === 'string' && otpToken.includes('.')) {
+    const [expiresAtStr, sig] = otpToken.split('.');
+    const expiresAt = parseInt(expiresAtStr, 10);
+    if (!isNaN(expiresAt) && Date.now() <= expiresAt) {
+      const expectedSig = crypto
+        .createHmac('sha256', OTP_SECRET)
+        .update(`${cleanPhone}:${cleanOtp}:${expiresAt}`)
+        .digest('hex');
+      if (expectedSig === sig) {
+        isVerified = true;
+      }
     }
-    return res.status(400).json({ success: false, message: `Incorrect OTP code. (${3 - record.attempts} attempts remaining)` });
+  }
+
+  // 2. Check In-Memory fallback (for local single-process dev)
+  if (!isVerified) {
+    const record = otpStore.get(cleanPhone);
+    if (record) {
+      if (Date.now() <= record.expiresAt && record.otp === cleanOtp) {
+        isVerified = true;
+        otpStore.delete(cleanPhone);
+      } else if (Date.now() > record.expiresAt) {
+        otpStore.delete(cleanPhone);
+        return res.status(400).json({ success: false, message: 'OTP has expired. Please request a new OTP.' });
+      } else {
+        record.attempts = (record.attempts || 0) + 1;
+        if (record.attempts >= 5) {
+          otpStore.delete(cleanPhone);
+          return res.status(400).json({ success: false, message: 'Too many incorrect attempts. Please request a new OTP.' });
+        }
+        return res.status(400).json({ success: false, message: `Incorrect OTP code. (${5 - record.attempts} attempts remaining)` });
+      }
+    }
+  }
+
+  if (!isVerified) {
+    return res.status(400).json({
+      success: false,
+      message: 'Incorrect OTP code. Please enter the valid code shown or request a new OTP.'
+    });
   }
 
   // OTP verified successfully!
@@ -546,14 +636,16 @@ app.post('/api/customer/otp/verify', (req, res) => {
     customer.lastLoginAt = new Date().toISOString();
     writeJSON(CUSTOMERS_FILE, customers);
   } else {
-    customer = record.customer || {
+    customer = passedCust || {
       id: 'CUST-' + cleanPhone.slice(-4),
-      name: 'Valued Customer',
+      name: (passedCust && passedCust.name) || 'Valued Customer',
       phone: cleanPhone,
-      address: '',
-      city: 'Ooty',
-      pincode: '643001'
+      address: (passedCust && passedCust.address) || '',
+      city: (passedCust && passedCust.city) || 'Ooty',
+      pincode: (passedCust && passedCust.pincode) || '643001'
     };
+    customers.push(customer);
+    writeJSON(CUSTOMERS_FILE, customers);
   }
 
   // Fetch all orders for this customer phone

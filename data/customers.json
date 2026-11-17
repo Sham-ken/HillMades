@@ -61,7 +61,7 @@
     "city": "Ooty",
     "pincode": "643001",
     "registeredAt": "2026-10-20T11:50:40.154Z",
-    "lastLoginAt": "2026-11-17T08:06:56.939Z"
+    "lastLoginAt": "2026-11-17T15:51:18.491Z"
   },
   {
     "id": "CUST-2740",
@@ -160,5 +160,37 @@
     "landmark": "",
     "registeredAt": "2026-11-17T14:34:12.376Z",
     "lastLoginAt": "2026-11-17T14:34:22.015Z"
+  },
+  {
+    "id": "CUST-4845",
+    "name": "Sham Sanjay",
+    "phone": "7878454845",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-11-17T15:32:06.479Z",
+    "lastLoginAt": "2026-11-17T15:32:15.853Z"
+  },
+  {
+    "id": "CUST-5454",
+    "name": "Sham Sanjay",
+    "phone": "9874845454",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-11-17T15:33:03.254Z"
+  },
+  {
+    "id": "CUST-6777",
+    "name": "Sham Ken",
+    "phone": "9788496777",
+    "address": "15 High Forest",
+    "city": "Ooty",
+    "pincode": "643001",
+    "landmark": "",
+    "registeredAt": "2026-11-17T15:51:18.501Z",
+    "lastLoginAt": "2026-11-17T15:51:18.507Z"
   }
 ]

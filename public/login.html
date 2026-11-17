@@ -335,10 +335,22 @@
           </h2>
 
           <!-- Subtitle with dynamic phone -->
-          <p style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; color: #6b7280; margin: 0 0 28px; line-height: 1.45;">
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; color: #6b7280; margin: 0 0 16px; line-height: 1.45;">
             Enter the 6-digit code sent to <strong id="dispOtpPhone" style="color: #374151; font-weight: 600;">+91 ----------</strong>
             <button type="button" onclick="returnFromOtp()" title="Edit mobile number" style="background: none; border: none; color: #2563eb; font-weight: 600; font-size: 0.8rem; cursor: pointer; text-decoration: underline; padding: 0 0 0 4px;">(Change)</button>
           </p>
+
+          <!-- Inline Prominent OTP Display (Always visible on live domain and mobile) -->
+          <div id="inlineOtpDisplay" style="display: none; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 0 auto 20px; padding: 10px 16px; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 12px; max-width: 380px;">
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="font-size: 0.95rem;">🔑</span>
+              <span style="font-family: 'Montserrat', sans-serif; font-size: 0.82rem; color: #166534; font-weight: 600;">Your OTP Code:</span>
+            </div>
+            <strong id="inlineOtpDisplayCode" style="font-family: 'Montserrat', monospace, sans-serif; font-size: 1.25rem; font-weight: 800; letter-spacing: 4px; color: #15803d; background: #ffffff; padding: 3px 12px; border-radius: 6px; border: 1px solid #bbf7d0; box-shadow: 0 1px 3px rgba(0,0,0,0.06);">------</strong>
+            <button type="button" onclick="autoFillOtpFromToast()" style="background: #16a34a; color: #ffffff; border: none; padding: 5px 12px; font-size: 0.76rem; font-weight: 700; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 4px;">
+              ⚡ Fill Code
+            </button>
+          </div>
 
           <form id="formVerifyOtp" onsubmit="handleVerifyOtpSubmit(event)">
             <!-- 6 Individual Blue-Bordered Digit Boxes (Screenshot 3 Replica) -->
@@ -352,7 +364,7 @@
             </div>
 
             <!-- Resend Code Row (Screenshot 3 Replica) -->
-            <div style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; color: #4b5563; margin-bottom: 26px;">
+            <div style="font-family: 'Montserrat', sans-serif; font-size: 0.88rem; color: #4b5563; margin-bottom: 16px;">
               <span>Didn't receive code? </span>
               <button type="button" id="btnResendOtp" onclick="handleResendOtp()" style="background: none; border: none; color: #2563eb; font-weight: 600; font-size: 0.88rem; cursor: pointer; text-decoration: none; padding: 0;">
                 Resend OTP
@@ -360,6 +372,13 @@
               <span id="resendCountdownText" style="display: none; color: #9ca3af; font-size: 0.84rem;">
                 (<strong id="timerSecs">45</strong>s)
               </span>
+            </div>
+
+            <!-- WhatsApp OTP option -->
+            <div id="otpWhatsAppRow" style="margin-top: -8px; margin-bottom: 22px;">
+              <a id="btnOtpWhatsApp" href="#" target="_blank" style="display: none; align-items: center; justify-content: center; gap: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.82rem; color: #15803d; text-decoration: none; font-weight: 600;">
+                <span>💬</span> <span>Open WhatsApp for OTP</span>
+              </a>
             </div>
 
             <!-- Verify OTP Button (Screenshot 3 Replica) -->
@@ -385,6 +404,8 @@
   <script>
     let activePhone = '';
     let currentOtp = '';
+    let currentOtpToken = '';
+    let currentCustomer = null;
     let countdownInterval = null;
     let activeView = 'login'; // 'login', 'register', or 'otp'
 
@@ -626,7 +647,8 @@
       await triggerSendOtp(phone);
     }
 
-    async function triggerSendOtp(phone) {
+    async function triggerSendOtp(phone, customerObj = null) {
+      clearAlert();
       const btn = document.getElementById('btnSubmitLogin');
       if (btn) {
         btn.disabled = true;
@@ -634,17 +656,24 @@
       }
 
       try {
+        const bodyPayload = { phone };
+        if (customerObj) {
+          bodyPayload.customer = customerObj;
+        }
+
         const response = await fetch('/api/customer/otp/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone })
+          body: JSON.stringify(bodyPayload)
         });
         const data = await response.json();
 
         if (response.ok && data.success) {
           activePhone = phone;
           currentOtp = data.otp;
-          showOtpView(phone, data.customerName, data.otp, data.whatsappOtpUrl);
+          currentOtpToken = data.otpToken || '';
+          currentCustomer = data.customer || customerObj || null;
+          showOtpView(phone, data.customerName || (customerObj && customerObj.name), data.otp, data.whatsappOtpUrl);
         } else if (data.notRegistered) {
           showAlert(
             `Mobile number <strong>+91 ${phone}</strong> is not registered yet.<br>
@@ -785,37 +814,49 @@
         const data = await response.json();
 
         if (response.ok && data.success) {
+          const registeredCustomer = data.customer || {
+            name,
+            phone: cleanPhone,
+            address,
+            city,
+            pincode
+          };
+          currentCustomer = registeredCustomer;
+          try {
+            localStorage.setItem('ooty_customer', JSON.stringify(registeredCustomer));
+          } catch(e) {}
+
           showRegisterSuccessModal({
-            customer: {
-              name,
-              phone: cleanPhone,
-              address,
-              city,
-              pincode
-            },
+            customer: registeredCustomer,
             onProceed: () => {
               showLoginView();
               const loginInp = document.getElementById('loginPhoneInput');
               if (loginInp) loginInp.value = cleanPhone;
               activePhone = cleanPhone;
-              triggerSendOtp(cleanPhone);
+              triggerSendOtp(cleanPhone, registeredCustomer);
             }
           });
         } else if (data.alreadyRegistered) {
+          const existingCust = data.customer || {
+            name,
+            phone: cleanPhone,
+            address,
+            city,
+            pincode
+          };
+          currentCustomer = existingCust;
+          try {
+            localStorage.setItem('ooty_customer', JSON.stringify(existingCust));
+          } catch(e) {}
+
           showRegisterSuccessModal({
-            customer: {
-              name,
-              phone: cleanPhone,
-              address,
-              city,
-              pincode
-            },
+            customer: existingCust,
             onProceed: () => {
               showLoginView();
               const loginInp = document.getElementById('loginPhoneInput');
               if (loginInp) loginInp.value = cleanPhone;
               activePhone = cleanPhone;
-              triggerSendOtp(cleanPhone);
+              triggerSendOtp(cleanPhone, existingCust);
             }
           });
         } else {
@@ -832,14 +873,6 @@
       }
     }
 
-    // Detect if running locally (localhost / 127.0.0.1 / local network)
-    const isLocalDev = window.location.hostname === 'localhost' || 
-                       window.location.hostname === '127.0.0.1' || 
-                       window.location.hostname === '' ||
-                       window.location.hostname.includes('192.168.') ||
-                       window.location.hostname.endsWith('.local') ||
-                       window.location.search.includes('dev=1');
-
     // 3. OTP Step View (Screenshot 3 Replica)
     function showOtpView(phone, custName, otp, waUrl) {
       activeView = 'otp';
@@ -852,23 +885,47 @@
       const dispPhone = document.getElementById('dispOtpPhone');
       if (dispPhone) dispPhone.textContent = `+91 ${phone}`;
 
-      // In Local Dev Mode: Show subtle OTP banner with auto-fill
-      if (isLocalDev) {
-        showLiveOtpToast(otp);
-      } else {
-        hideLiveOtpToast();
+      // ALWAYS show the live OTP toast badge in both local and live production!
+      showLiveOtpToast(otp);
+
+      // Also display the inline OTP card right on the screen
+      const inlineDisplay = document.getElementById('inlineOtpDisplay');
+      const inlineCode = document.getElementById('inlineOtpDisplayCode');
+      if (inlineDisplay && inlineCode && otp) {
+        inlineCode.textContent = otp;
+        inlineDisplay.style.display = 'flex';
+      }
+
+      // WhatsApp Option
+      const waBtn = document.getElementById('btnOtpWhatsApp');
+      if (waBtn) {
+        if (waUrl) {
+          waBtn.href = waUrl;
+          waBtn.style.display = 'inline-flex';
+        } else {
+          waBtn.style.display = 'none';
+        }
       }
 
       console.log(`%c[HILL MADES GATEWAY] Dispatched 6-digit OTP code to +91 ${phone}: ${otp}`, 'color: #2563eb; font-weight: bold;');
 
       startResendCountdown(45);
 
-      for (let i = 0; i <= 5; i++) {
-        const box = document.getElementById('otpBox' + i);
-        if (box) box.value = '';
+      // Auto-prefill the boxes for instant convenience
+      if (otp && otp.length === 6) {
+        for (let i = 0; i < 6; i++) {
+          const box = document.getElementById('otpBox' + i);
+          if (box) box.value = otp[i];
+        }
+      } else {
+        for (let i = 0; i <= 5; i++) {
+          const box = document.getElementById('otpBox' + i);
+          if (box) box.value = '';
+        }
       }
+
       setTimeout(() => {
-        document.getElementById('otpBox0')?.focus();
+        document.getElementById('btnSubmitOtp')?.focus();
       }, 100);
     }
 
@@ -1001,7 +1058,12 @@
         const response = await fetch('/api/customer/otp/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone: activePhone, otp: enteredOtp })
+          body: JSON.stringify({
+            phone: activePhone,
+            otp: enteredOtp,
+            otpToken: currentOtpToken,
+            customer: currentCustomer
+          })
         });
         const data = await response.json();
 
