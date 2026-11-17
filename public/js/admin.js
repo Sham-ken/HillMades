@@ -1,5 +1,5 @@
 /**
- * OOTY HILLS SNACKS - COMPLETE STORE OWNER ADMIN SYSTEM
+ * HILL MADES SNACKS - COMPLETE STORE OWNER ADMIN SYSTEM
  * Comprehensive Shop Management:
  * 1. Dashboard & KPI Analytics
  * 2. Products & Upload Center (Only what admin uploads is shown on website!)
@@ -33,7 +33,124 @@ const pinInput = document.getElementById('adminPinInput');
 document.addEventListener('DOMContentLoaded', () => {
   checkSessionAuth();
   setupAdminEvents();
+  if (typeof updateProductTypeOptions === 'function') {
+    updateProductTypeOptions();
+  }
 });
+
+// Enterprise Toast Notification
+function showAdminToast(message, type = 'success') {
+  const container = document.getElementById('adminToastContainer');
+  if (!container) return;
+  const toast = document.createElement('div');
+  toast.className = `admin-toast ${type}`;
+  const icon = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+  toast.innerHTML = `<span class="admin-toast-icon">${icon}</span> <span>${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    setTimeout(() => toast.remove(), 250);
+  }, 3500);
+}
+
+// Dynamic Category & Types Registry
+function populateDatalists() {
+  const catList = document.getElementById('dynamicCategoryList');
+  const typeList = document.getElementById('dynamicTypeList');
+
+  const cats = new Set();
+  const types = new Set();
+
+  if (Array.isArray(adminState.products)) {
+    adminState.products.forEach(p => {
+      if (p.categoryName) cats.add(p.categoryName);
+      else if (p.category) cats.add(p.category.charAt(0).toUpperCase() + p.category.slice(1));
+      if (p.type && p.type.trim()) types.add(p.type.trim());
+    });
+  }
+
+  if (catList) {
+    catList.innerHTML = Array.from(cats).map(c => `<option value="${c}"></option>`).join('');
+  }
+  if (typeList) {
+    typeList.innerHTML = Array.from(types).map(t => `<option value="${t}"></option>`).join('');
+  }
+}
+
+window.handleAdminImagePreview = (e) => {
+  const file = e.target.files && e.target.files[0];
+  const container = document.getElementById('imagePreviewContainer');
+  const preview = document.getElementById('imagePreview');
+  if (file && container && preview) {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      preview.src = ev.target.result;
+      container.style.display = 'flex';
+    };
+    reader.readAsDataURL(file);
+  } else if (container) {
+    container.style.display = 'none';
+  }
+};
+
+window.openEditProductModal = (productId) => {
+  const prod = adminState.products.find(p => p.id === productId);
+  if (!prod) return;
+  populateDatalists();
+  document.getElementById('editProdId').value = prod.id;
+  document.getElementById('editProdName').value = prod.name;
+  document.getElementById('editProdCategory').value = prod.categoryName || (prod.category ? prod.category.charAt(0).toUpperCase() + prod.category.slice(1) : '');
+  document.getElementById('editProdType').value = prod.type || '';
+  document.getElementById('editProdPrice').value = prod.price;
+  document.getElementById('editProdUnit').value = prod.unit || '1 kg';
+  document.getElementById('editProdBadge').value = prod.badge || '';
+  document.getElementById('editProductModal')?.classList.add('active');
+};
+
+window.closeEditProductModal = () => {
+  document.getElementById('editProductModal')?.classList.remove('active');
+};
+
+window.handleEditProductSubmit = async (e) => {
+  e.preventDefault();
+  const id = document.getElementById('editProdId').value;
+  const name = document.getElementById('editProdName').value.trim();
+  const catInput = document.getElementById('editProdCategory').value.trim() || 'General';
+  const typeInput = document.getElementById('editProdType').value.trim() || 'Standard';
+
+  const category = catInput.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const categoryName = catInput;
+  const type = typeInput;
+
+  const price = Number(document.getElementById('editProdPrice').value);
+  const unit = document.getElementById('editProdUnit').value.trim();
+  const badge = document.getElementById('editProdBadge').value.trim();
+
+  try {
+    const res = await fetch(`/api/products/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, category, categoryName, type, price, unit, badge })
+    });
+    const data = await res.json();
+    if (data.success) {
+      const idx = adminState.products.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        adminState.products[idx] = { ...adminState.products[idx], name, category, categoryName, type, price, unit, badge };
+      }
+      populateDatalists();
+      renderProductsTable();
+      renderDashboardProductsTable();
+      closeEditProductModal();
+      showAdminToast(`Updated "${name}" successfully!`, 'success');
+    } else {
+      showAdminToast(data.message || 'Failed to update', 'error');
+    }
+  } catch (err) {
+    showAdminToast('Communication error', 'error');
+  }
+};
 
 // ----------------- AUTHENTICATION ----------------- //
 function checkSessionAuth() {
@@ -106,6 +223,7 @@ async function fetchProducts() {
     const data = await res.json();
     if (data.success) {
       adminState.products = data.products;
+      populateDatalists();
       renderProductsTable();
       renderDashboardProductsTable();
     }
@@ -130,7 +248,6 @@ function renderDashboardProductsTable() {
       </td>
       <td>
         <strong>${p.name}</strong>
-        ${p.tamilName ? `<br><small style="color: #0f766e; font-weight: 600;">${p.tamilName}</small>` : ''}
       </td>
       <td><span style="background: #f1f5f9; padding: 3px 8px; border-radius: 4px; font-size: 0.78rem; font-weight: 600;">${p.category}</span></td>
       <td><strong>${p.unit}</strong></td>
@@ -177,13 +294,15 @@ function renderProductsTable() {
           <img src="${p.image}" alt="${p.name}" class="product-row-thumb" onerror="this.src='/images/varkey.jpg'" style="width: 44px; height: 44px; border-radius: 8px; object-fit: cover; border: 1px solid #e2e8f0;">
           <div>
             <div style="font-weight: 700; color: #0f172a; font-size: 0.92rem;">${p.name}</div>
-            ${p.tamilName ? `<div style="color: #0f766e; font-size: 0.78rem; font-weight: 600;">${p.tamilName}</div>` : ''}
             ${p.badge ? `<span style="font-size: 0.7rem; color: #b45309; background: #fef3c7; padding: 1px 6px; border-radius: 4px; font-weight: 700; display: inline-block; margin-top: 2px;">${p.badge}</span>` : ''}
           </div>
         </div>
       </td>
       <td>
-        <span style="background: #f1f5f9; color: #334155; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-transform: capitalize;">${p.category}</span>
+        <div style="display: flex; align-items: center; gap: 4px; flex-wrap: wrap;">
+          <span style="background: #f1f5f9; color: #334155; padding: 4px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-transform: capitalize;">${p.category}</span>
+          ${p.type ? `<span style="background: #e0f2fe; color: #0369a1; padding: 2px 7px; border-radius: 4px; font-size: 0.72rem; font-weight: 700;">${p.type}</span>` : ''}
+        </div>
       </td>
       <td><strong style="color: #334155; font-size: 0.86rem;">${p.unit}</strong></td>
       <td>
@@ -211,11 +330,14 @@ function renderProductsTable() {
       </td>
       <td style="text-align: right;">
         <div style="display: inline-flex; gap: 6px; align-items: center; justify-content: flex-end;">
-          <a href="/shop.html" target="_blank" class="btn-table-icon view" title="View snack live on Customer Store">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          <button type="button" class="btn-table-icon edit" title="Edit product" onclick="openEditProductModal('${p.id}')" style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          </button>
+          <a href="/shop.html" target="_blank" class="btn-table-icon view" title="View snack live on Customer Store" style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 6px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#334155" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
           </a>
-          <button type="button" class="btn-table-icon delete" title="Delete product" onclick="deleteProduct('${p.id}')">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+          <button type="button" class="btn-table-icon delete" title="Delete product" onclick="deleteProduct('${p.id}')" style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
           </button>
         </div>
       </td>
@@ -227,7 +349,7 @@ window.saveProductPrice = async (productId) => {
   const input = document.getElementById(`price-input-${productId}`);
   const newPrice = Number(input.value);
   if (!newPrice || newPrice < 1) {
-    alert('Please enter a valid price');
+    showAdminToast('Please enter a valid price', 'error');
     return;
   }
 
@@ -241,10 +363,10 @@ window.saveProductPrice = async (productId) => {
     if (data.success) {
       const prod = adminState.products.find(p => p.id === productId);
       if (prod) prod.price = newPrice;
-      alert(`Updated price to ₹${newPrice}! It is now updated on the customer website.`);
+      showAdminToast(`Updated price to ₹${newPrice}!`, 'success');
     }
   } catch (err) {
-    alert('Error updating price');
+    showAdminToast('Error updating price', 'error');
   }
 };
 
@@ -259,8 +381,9 @@ window.toggleProductVisibility = async (productId, isHidden) => {
     if (prod) prod.isHidden = isHidden;
     renderProductsTable();
     fetchStats();
+    showAdminToast(isHidden ? 'Product hidden from store' : 'Product is now live on store', 'info');
   } catch (e) {
-    alert('Failed to update visibility');
+    showAdminToast('Failed to update visibility', 'error');
   }
 };
 
@@ -274,8 +397,9 @@ window.toggleProductStock = async (productId, inStock) => {
     const prod = adminState.products.find(p => p.id === productId);
     if (prod) prod.inStock = inStock;
     renderProductsTable();
+    showAdminToast(inStock ? 'Marked as In Stock' : 'Marked as Sold Out', 'info');
   } catch (e) {
-    alert('Failed to update stock');
+    showAdminToast('Failed to update stock', 'error');
   }
 };
 
@@ -287,10 +411,12 @@ window.deleteProduct = async (productId) => {
     if (data.success) {
       adminState.products = adminState.products.filter(p => p.id !== productId);
       renderProductsTable();
+      renderDashboardProductsTable();
       fetchStats();
+      showAdminToast('Product removed from store', 'success');
     }
   } catch (e) {
-    alert('Failed to delete product');
+    showAdminToast('Failed to delete product', 'error');
   }
 };
 
@@ -360,7 +486,7 @@ function createOrderCardHtml(order) {
 
   let rawCustPhone = (order.customer.phone || '').replace(/\D/g, '');
   if (rawCustPhone.length === 10) rawCustPhone = '91' + rawCustPhone;
-  const custChatMsg = encodeURIComponent(`Hello ${order.customer.name}! This is from Ooty Hills Snacks regarding your order #${order.id}.`);
+  const custChatMsg = encodeURIComponent(`Hello ${order.customer.name}! This is from Hill Mades Snacks regarding your order #${order.id}.`);
   const custWhatsAppUrl = `https://wa.me/${rawCustPhone}?text=${custChatMsg}`;
 
   return `
@@ -487,11 +613,12 @@ window.updateOrderStatus = async (orderId, newStatus) => {
       renderOrders();
       renderDashboardRecentOrders();
       fetchStats();
+      showAdminToast(`Order #${orderId} marked as ${newStatus}`, 'success');
     } else {
-      alert(data.message || 'Status update failed');
+      showAdminToast(data.message || 'Status update failed', 'error');
     }
   } catch (err) {
-    alert('Failed to connect to server');
+    showAdminToast('Failed to connect to server', 'error');
   }
 };
 
@@ -516,7 +643,7 @@ window.printOrderInvoice = (orderId) => {
       </head>
       <body>
         <div class="header">
-          <div class="title">OOTY HILLS SNACKS & CHOCOLATES</div>
+          <div class="title">HILL MADES SNACKS & CHOCOLATES</div>
           <div>100% Online Store • Fresh Dispatch from Ooty, Nilgiris</div>
           <div>WhatsApp / Contact: ${adminState.settings.whatsappNumber || '919345738268'}</div>
           <div style="margin-top: 8px; font-weight: bold;">PACKING SLIP & BILL #${order.id}</div>
@@ -601,7 +728,7 @@ function renderCustomersTable() {
   container.innerHTML = filtered.map(c => {
     let cleanP = c.phone.replace(/\D/g, '');
     if (cleanP.length === 10) cleanP = '91' + cleanP;
-    const waUrl = `https://wa.me/${cleanP}?text=${encodeURIComponent('Hello ' + c.name + '! Greeting from Ooty Hills Snacks.')}`;
+    const waUrl = `https://wa.me/${cleanP}?text=${encodeURIComponent('Hello ' + c.name + '! Greeting from Hill Mades Snacks.')}`;
 
     return `
       <tr>
@@ -795,6 +922,14 @@ function setupAdminEvents() {
     const breadcrumbEl = document.getElementById('topbarBreadcrumb') || document.getElementById('topbarTitle');
     if (breadcrumbEl) breadcrumbEl.textContent = titles[tabTarget] || 'Dashboard';
 
+    // Auto-close mobile sidebar drawer if open
+    const sidebar = document.getElementById('adminSidebar');
+    const backdrop = document.getElementById('sidebarMobileBackdrop');
+    if (sidebar && sidebar.classList.contains('open')) {
+      sidebar.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('active');
+    }
+
     // Smooth scroll to top of workspace
     const workspace = document.querySelector('.admin-workspace');
     if (workspace) workspace.scrollTop = 0;
@@ -808,6 +943,25 @@ function setupAdminEvents() {
     });
   });
 
+  // Mobile Sidebar Drawer Toggle
+  const btnMobileMenu = document.getElementById('btnAdminMobileMenu');
+  const adminSidebar = document.getElementById('adminSidebar');
+  const sidebarBackdrop = document.getElementById('sidebarMobileBackdrop');
+
+  if (btnMobileMenu && adminSidebar) {
+    btnMobileMenu.addEventListener('click', () => {
+      adminSidebar.classList.toggle('open');
+      if (sidebarBackdrop) sidebarBackdrop.classList.toggle('active');
+    });
+  }
+
+  if (sidebarBackdrop && adminSidebar) {
+    sidebarBackdrop.addEventListener('click', () => {
+      adminSidebar.classList.remove('open');
+      sidebarBackdrop.classList.remove('active');
+    });
+  }
+
   // Upload Product Form
   const addProductForm = document.getElementById('addProductForm');
   if (addProductForm) {
@@ -815,9 +969,17 @@ function setupAdminEvents() {
       e.preventDefault();
       const btn = document.getElementById('btnUploadProduct');
       btn.disabled = true;
-      btn.innerHTML = `<span>⏳</span> Adding to Catalog & Publishing...`;
+      btn.innerHTML = `<span>⏳</span> Adding to Catalog...`;
 
       const formData = new FormData(addProductForm);
+
+      const catInput = document.getElementById('prodCategory')?.value.trim() || 'General';
+      const typeInput = document.getElementById('prodType')?.value.trim() || 'Standard';
+
+      const catSlug = catInput.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      formData.set('category', catSlug);
+      formData.set('categoryName', catInput);
+      formData.set('type', typeInput);
 
       try {
         const res = await fetch('/api/products', {
@@ -826,17 +988,24 @@ function setupAdminEvents() {
         });
         const data = await res.json();
         if (data.success) {
-          alert(`🎉 Success! "${data.product.name}" has been published to your store.\n\nNow redirecting to the front store page to see your live product!`);
-          // Redirect directly to customer front store page
-          window.location.href = `/shop.html?added=${encodeURIComponent(data.product.name)}`;
+          showAdminToast(`✓ "${data.product.name}" added to catalog successfully!`, 'success');
+          addProductForm.reset();
+          const previewContainer = document.getElementById('imagePreviewContainer');
+          if (previewContainer) previewContainer.style.display = 'none';
+
+          // Refresh live catalog and dashboard data immediately
+          await loadAllAdminData();
+
+          // Switch to Products Catalog view so owner sees the new item right away in the table!
+          window.switchAdminTab('products');
         } else {
-          alert(data.message || 'Failed to upload product');
+          showAdminToast(data.message || 'Failed to upload product', 'error');
         }
       } catch (err) {
-        alert('Server communication error');
+        showAdminToast('Server communication error', 'error');
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<span>🚀</span> Add Product & Go to Front Page`;
+        btn.innerHTML = `<span>➕</span> Add Product to Store`;
       }
     });
   }
@@ -860,12 +1029,13 @@ function setupAdminEvents() {
         });
         const data = await res.json();
         if (data.success) {
+          showAdminToast('Expense logged successfully!', 'success');
           addExpenseForm.reset();
           fetchFinances();
           fetchStats();
         }
       } catch (err) {
-        alert('Failed to record expense');
+        showAdminToast('Failed to record expense', 'error');
       }
     });
   }
@@ -897,7 +1067,7 @@ function setupAdminEvents() {
         });
         const data = await res.json();
         if (data.success) {
-          alert('Store settings, WhatsApp Number & SMS Gateway saved successfully!');
+          showAdminToast('Store settings saved successfully!', 'success');
           adminState.settings = data.settings;
           renderSettingsForm();
           if (newPin) {

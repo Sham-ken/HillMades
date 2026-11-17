@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Account & Orders Portal | Ooty Hills Snacks</title>
-  <meta name="description" content="Secure customer account portal for Ooty Hills Snacks. Track live orders, manage delivery addresses, and access instant WhatsApp OTP verification.">
+  <title>Customer Account & Orders Portal | Hill Mades Snacks</title>
+  <meta name="description" content="Secure customer account portal for Hill Mades Snacks. Track live orders, manage delivery addresses, and access instant WhatsApp OTP verification.">
   
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/account.css">
@@ -18,19 +18,21 @@
       <a href="/" class="portal-brand-block">
         <div class="portal-logo-icon">🏔️</div>
         <div class="portal-brand-text">
-          <h2>Ooty Hills <span class="portal-brand-badge">Customer Portal</span></h2>
+          <h2>Hill Mades <span class="portal-brand-badge">Portal</span></h2>
         </div>
       </a>
 
       <div class="portal-nav-actions">
-        <a href="/" class="portal-nav-btn secondary">
-          <span>← Back to Store</span>
+        <a href="/" class="portal-nav-btn secondary" title="Back to Store">
+          <span class="desktop-only-txt">← Back to Store</span>
+          <span class="mobile-only-txt">← Store</span>
         </a>
-        <a href="/shop.html" class="portal-nav-btn primary">
-          <span>Shop Catalog 🛍️</span>
+        <a href="/shop.html" class="portal-nav-btn primary" title="Shop Catalog">
+          <span class="desktop-only-txt">Shop Catalog 🛍️</span>
+          <span class="mobile-only-txt">Shop 🛍️</span>
         </a>
-        <button type="button" class="portal-nav-btn secondary" id="portalHeaderAuthBtn" onclick="handlePortalHeaderAuth()">
-          <span id="portalAuthBtnText">Login</span>
+        <button type="button" class="portal-nav-btn secondary portal-auth-btn" id="portalHeaderAuthBtn" onclick="handlePortalHeaderAuth()" title="Account Session">
+          <span id="portalAuthBtnText">Sign Out</span>
         </button>
       </div>
     </div>
@@ -109,7 +111,7 @@
             </select>
           </div>
           <button type="submit" class="btn-order-whatsapp-submit">
-            <span>💬</span> Confirm & Send Order to WhatsApp
+            <span>💬</span> (Confirm and Send to WhatsApp)
           </button>
         </form>
       </div>

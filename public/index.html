@@ -4,14 +4,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ooty Hills™ | Authentic Nilgiris Delights, Fresh Varkey & Artisan Chocolates</title>
+  <title>Hill Mades™ | Authentic Nilgiris Delights, Fresh Varkey & Artisan Chocolates</title>
   <meta name="description"
     content="Order authentic 100% Pure Veg Nilgiris woodfired Ooty Varkey, homemade artisan chocolates, estate tea & fresh bakes online. FSSAI certified, pan-India express courier delivery.">
   <meta name="keywords"
-    content="ooty varkey, buy ooty varkey online, homemade chocolates ooty, nilgiri tea online, nilgiris bakery snacks, ooty sweets, ooty hills snacks">
+    content="ooty varkey, buy ooty varkey online, homemade chocolates ooty, nilgiri tea online, nilgiris bakery snacks, ooty sweets, hill mades snacks">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="http://localhost:3000/">
   <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Critical SVG & Brand Emblem Guard */
+    svg.brand-emblem, .brand-emblem {
+      width: 42px !important;
+      height: 42px !important;
+      max-width: 42px !important;
+      max-height: 42px !important;
+      color: #8B1A1A !important;
+      flex-shrink: 0;
+      display: inline-block;
+    }
+    .brand-logo {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      text-decoration: none !important;
+    }
+    svg { max-width: 100%; }
+  </style>
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
 
@@ -20,7 +40,7 @@
   {
     "@context": "https://schema.org",
     "@type": "OnlineStore",
-    "name": "Ooty Hills Nilgiris Delights & Artisanal Bakes",
+    "name": "Hill Mades Nilgiris Delights & Artisanal Bakes",
     "image": "http://localhost:3000/images/varkey.jpg",
     "description": "Authentic woodfired Ooty varkey, homemade chocolates, and Nilgiri estate teas shipped fresh across India.",
     "url": "http://localhost:3000/",
@@ -52,26 +72,19 @@
 
 <body>
 
-  <!-- ==================== TOP LUXURY ANNOUNCEMENT TICKER ==================== -->
-  <div class="top-announcement-bar">
-    <div class="container announcement-inner">
-      <span>✦ COMPLIMENTARY EXPRESS SHIPPING ON ORDERS OVER ₹500 • 100% PURE VEGETARIAN NILGIRIS BAKES ✦</span>
-    </div>
-  </div>
-
   <!-- ==================== PRIMARY HEADER (EXACT MENAGAII STYLE) ==================== -->
   <header class="site-header">
     <div class="container">
       <div class="header-inner">
         <!-- Logo -->
         <a href="/" class="brand-logo" id="mainBrandLogo">
-          <svg class="brand-emblem" viewBox="0 0 100 100">
+          <svg class="brand-emblem" viewBox="0 0 100 100" width="42" height="42" style="width: 42px; height: 42px; max-width: 42px; color: #8B1A1A;">
             <path d="M50 12 C52 32 72 45 88 45 C72 55 62 76 50 88 C38 76 28 55 12 45 C28 45 48 32 50 12 Z" fill="none"
               stroke="currentColor" stroke-width="4.5" />
             <circle cx="50" cy="48" r="9" fill="currentColor" />
           </svg>
           <div class="brand-text">
-            <h1>Ooty Hills</h1>
+            <h1>Hill Mades</h1>
             <span>Nilgiris Heritage</span>
           </div>
         </a>
@@ -85,18 +98,99 @@
             <li class="nav-item">
               <a href="/shop.html" class="nav-link">Shop</a>
             </li>
-            <li class="nav-item">
-              <a href="/shop.html" class="nav-link">
-                Collections
-                <svg class="caret-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
+            <li class="nav-item has-collections-dropdown">
+              <a href="/collections.html" class="nav-link">
+                COLLECTIONS
+                <svg class="caret-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </a>
-              <div class="dropdown-menu">
-                <a href="/shop.html?cat=snacks">🥖 Ooty Varkey & Bakery</a>
-                <a href="/shop.html?cat=chocolates">🍫 Homemade Chocolates</a>
-                <a href="/shop.html?cat=beverages">☕ Estate Tea & Coffee</a>
-                <a href="/shop.html?cat=biscuits">🍪 Crispy Salt Biscuits</a>
+              <div class="collections-dropdown-wrapper">
+                <!-- Card 1: Left Categories (Screenshot 2) -->
+                <div class="collections-primary-card">
+                  <a href="/shop.html?cat=varkey" class="collections-primary-link active" data-cat="varkey">
+                    <span>Vareky</span>
+                  </a>
+                  <a href="/shop.html?cat=tea" class="collections-primary-link" data-cat="tea">
+                    <span>Tea Thool</span>
+                  </a>
+                  <a href="/shop.html?cat=coffee" class="collections-primary-link" data-cat="coffee">
+                    <span>Coffee Thool</span>
+                  </a>
+                  <a href="/shop.html?cat=chocolates" class="collections-primary-link" data-cat="chocolates">
+                    <span>Homemade Chocolate</span>
+                  </a>
+                  <a href="/shop.html?cat=biscuits" class="collections-primary-link" data-cat="biscuits">
+                    <span>Salt Biscuits</span>
+                  </a>
+                </div>
+
+                <!-- Card 2: Right Sub-Items (Screenshot 2) -->
+                <!-- 1. Vareky -->
+                <div class="collections-secondary-card active" data-cat="varkey">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Vareky</span>
+                    <a href="/shop.html?cat=varkey" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Square" class="submenu-type-link">Square</a></li>
+                    <li><a href="/shop.html?type=Round" class="submenu-type-link">Round</a></li>
+                    <li><a href="/shop.html?type=Oval" class="submenu-type-link">Oval</a></li>
+                  </ul>
+                </div>
+
+                <!-- 2. Tea Thool -->
+                <div class="collections-secondary-card" data-cat="tea">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Tea Thool</span>
+                    <a href="/shop.html?cat=tea" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Kannavarai" class="submenu-type-link">Kannavarai</a></li>
+                    <li><a href="/shop.html?type=River+Side" class="submenu-type-link">River Side</a></li>
+                    <li><a href="/shop.html?type=Darmoda" class="submenu-type-link">Darmoda</a></li>
+                    <li><a href="/shop.html?type=Pandiyan+CTC+Tea" class="submenu-type-link">Pandiyan CTC Tea</a></li>
+                  </ul>
+                </div>
+
+                <!-- 3. Coffee Thool -->
+                <div class="collections-secondary-card" data-cat="coffee">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Coffee Thool</span>
+                    <a href="/shop.html?cat=coffee" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=3+Roses" class="submenu-type-link">3 Roses</a></li>
+                    <li><a href="/shop.html?type=Sunrise" class="submenu-type-link">Sunrise</a></li>
+                    <li><a href="/shop.html?type=BRU" class="submenu-type-link">BRU</a></li>
+                    <li><a href="/shop.html?type=Levista" class="submenu-type-link">Levista</a></li>
+                  </ul>
+                </div>
+
+                <!-- 4. Homemade Chocolate -->
+                <div class="collections-secondary-card" data-cat="chocolates">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Homemade Chocolate</span>
+                    <a href="/shop.html?cat=chocolates" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Dark+Chocolate" class="submenu-type-link">Dark Chocolate</a></li>
+                    <li><a href="/shop.html?type=Milk+Chocolate" class="submenu-type-link">Milk Chocolate</a></li>
+                    <li><a href="/shop.html?type=White+Chocolate" class="submenu-type-link">White Chocolate</a></li>
+                    <li><a href="/shop.html?type=Nut+%26+Fruit+Clusters+%2F+Barks" class="submenu-type-link">Nut & Fruit Clusters / Barks</a></li>
+                  </ul>
+                </div>
+
+                <!-- 5. Salt Biscuits -->
+                <div class="collections-secondary-card" data-cat="biscuits">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Salt Biscuits</span>
+                    <a href="/shop.html?cat=biscuits" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Classic+Salt+Biscuits" class="submenu-type-link">Classic Salt Biscuits</a></li>
+                    <li><a href="/shop.html?type=Jeera+Salt+Biscuits" class="submenu-type-link">Jeera Salt Biscuits</a></li>
+                    <li><a href="/shop.html?type=Mountain+Butter+Salt+Biscuits" class="submenu-type-link">Mountain Butter Salt Biscuits</a></li>
+                  </ul>
+                </div>
               </div>
             </li>
             <li class="nav-item">
@@ -138,19 +232,9 @@
               </div>
 
               <ul class="account-menu-list">
+                
                 <li class="account-menu-item">
-                  <a href="/account" class="account-menu-link"
-                    style="color: var(--brand-primary); font-weight: 700; background: #fafaf9; border-bottom: 1px solid var(--border-light);">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                    <span>Full Customer Portal ↗</span>
-                  </a>
-                </li>
-                <li class="account-menu-item">
-                  <button type="button" class="account-menu-link" id="menuActionOrders">
+                  <a href="/account?tab=orders" class="account-menu-link" id="menuActionOrders" onclick="handleMenuNavOrders(event)">
                     <svg viewBox="0 0 24 24">
                       <path
                         d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
@@ -159,16 +243,16 @@
                       <line x1="12" y1="22.08" x2="12" y2="12"></line>
                     </svg>
                     <span>My Orders</span>
-                  </button>
+                  </a>
                 </li>
                 <li class="account-menu-item">
-                  <button type="button" class="account-menu-link" id="menuActionAddresses">
+                  <a href="/account?tab=addresses" class="account-menu-link" id="menuActionAddresses" onclick="handleMenuNavAddresses(event)">
                     <svg viewBox="0 0 24 24">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                       <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                     <span>My Addresses</span>
-                  </button>
+                  </a>
                 </li>
                 <li class="account-menu-item">
                   <button type="button" class="account-menu-link" id="menuActionWishlist">
@@ -272,11 +356,13 @@
                     </svg>
                   </button>
                   <ul class="menu-dropdown-sublist" id="menuDropdownCollectionsList">
-                    <li><a href="/shop.html">✦ All Nilgiri Delights</a></li>
-                    <li><a href="/shop.html?cat=snacks">🥖 Ooty Varkey & Crisps</a></li>
-                    <li><a href="/shop.html?cat=chocolates">🍫 Homemade Chocolates</a></li>
-                    <li><a href="/shop.html?cat=beverages">☕ Estate Tea & Coffee</a></li>
-                    <li><a href="/shop.html?cat=biscuits">🍪 Crispy Salt Biscuits</a></li>
+                    <li><a href="/shop.html">✦ All Delicacies (View All)</a></li>
+                    <li><a href="/shop.html?cat=varkey">1. Vareky (Square, Round, Oval)</a></li>
+                    <li><a href="/shop.html?cat=tea">2. Tea Thool (Estate Blends)</a></li>
+                    <li><a href="/shop.html?cat=coffee">3. Coffee Thool (Roasts)</a></li>
+                    <li><a href="/shop.html?cat=chocolates">4. Homemade Chocolate (Barks & Clusters)</a></li>
+                    <li><a href="/shop.html?cat=biscuits">5. Salt Biscuits (Mountain Crisps)</a></li>
+                    <li><a href="/collections.html" style="color: var(--brand-primary); font-weight: 700;">★ View Curated Collections Page ➔</a></li>
                   </ul>
                 </li>
                 <li class="menu-dropdown-item">
@@ -383,12 +469,12 @@
       </div>
 
       <div class="collections-grid">
-        <a href="/shop.html?cat=snacks" class="collection-card">
+        <a href="/shop.html?cat=varkey" class="collection-card">
           <img src="/images/varkey.jpg" alt="Woodfired Ooty Varkey">
           <div class="collection-overlay">
             <span class="coll-tag">Bestseller #1</span>
             <h3 class="collection-title">Woodfired Ooty Varkey</h3>
-            <span class="collection-link-text">Shop 14+ Bakery Delights →</span>
+            <span class="collection-link-text">Shop Traditional Varkey →</span>
           </div>
         </a>
 
@@ -401,7 +487,7 @@
           </div>
         </a>
 
-        <a href="/shop.html?cat=beverages" class="collection-card">
+        <a href="/shop.html?cat=tea" class="collection-card">
           <img src="/images/tea.jpg" alt="Nilgiris Estate Tea & Fresh Roasted Coffee">
           <div class="collection-overlay">
             <span class="coll-tag">High Grown 7000ft</span>
@@ -586,7 +672,7 @@
 
           <button type="submit" class="btn-checkout-whatsapp"
             style="width: 100%; margin-top: 10px; padding: 14px; font-size: 1rem;">
-            <span>💬</span> Confirm & Send Order to WhatsApp
+            <span>💬</span> (Confirm and Send to WhatsApp)
           </button>
         </form>
       </div>
@@ -680,7 +766,7 @@
                 stroke="currentColor" stroke-width="5" />
               <circle cx="50" cy="48" r="9" fill="currentColor" />
             </svg>
-            <h3 style="margin: 0; font-family: var(--font-serif); font-size: 1.6rem; color: #fdfcfb;">Ooty Hills™</h3>
+            <h3 style="margin: 0; font-family: var(--font-serif); font-size: 1.6rem; color: #fdfcfb;">Hill Mades™</h3>
           </div>
           <p>
             Authentic hill station woodfired baking and artisanal confectioneries delivered fresh directly to your
@@ -721,7 +807,7 @@
             📦 100% Online Store • Express Doorstep Delivery Across India
           </p>
           <p style="font-size: 0.88rem; color: #a8a29e; margin-bottom: 12px;">
-            📞 WhatsApp Support: +91 93457 38268
+            <a href="https://wa.me/919345738268?text=Hello%20Hill%20Mades!%20I%20have%20an%20inquiry%20about%20your%20Nilgiri%20delicacies." target="_blank" style="color: inherit; text-decoration: none;">📞 WhatsApp Support: <strong>+91 93457 38268</strong></a>
           </p>
           <div class="dispatch-badge-strip">
             <span>⚡ Orders Dispatched in 24 Hours</span>
@@ -730,7 +816,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 Ooty Hills™ Snacks & Confectionery. All rights reserved. Certified Nilgiris Origin.</p>
+        <p>&copy; 2026 Hill Mades™ Snacks & Confectionery. All rights reserved. Certified Nilgiris Origin.</p>
         <p>Ranked #1 Authentic Nilgiris Bakery Online • Built for India</p>
       </div>
     </div>

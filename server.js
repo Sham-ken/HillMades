@@ -117,11 +117,60 @@ app.get('/api/products', (req, res) => {
   res.json({ success: true, products: activeProducts });
 });
 
+// Dynamic Categories Endpoint: Derives and synchronizes all active categories and their varieties/types ONLY from existing products
+app.get('/api/categories', (req, res) => {
+  const products = readJSON(PRODUCTS_FILE, []);
+  const activeProducts = req.query.admin === 'true' ? products : products.filter(p => !p.isHidden);
+
+  // Group dynamic categories ONLY from actual products uploaded by admin
+  const categoryMap = new Map();
+
+  activeProducts.forEach(p => {
+    const rawCat = (p.category || 'general').trim();
+    const slug = rawCat.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    const catName = p.categoryName || (rawCat.charAt(0).toUpperCase() + rawCat.slice(1));
+
+    if (!categoryMap.has(slug)) {
+      categoryMap.set(slug, {
+        category: slug,
+        name: catName,
+        badge: p.badge || 'Hill Made Specialty',
+        description: p.description || `Freshly prepared Nilgiri ${catName} specialty. Handcrafted with authentic mountain recipes.`,
+        image: p.image || '/images/varkey-square.jpg',
+        types: new Set(),
+        productCount: 0,
+        startingPrice: Infinity
+      });
+    }
+
+    const catObj = categoryMap.get(slug);
+    catObj.productCount += 1;
+    if (p.price && Number(p.price) < catObj.startingPrice) {
+      catObj.startingPrice = Number(p.price);
+    }
+    if (p.image) {
+      catObj.image = p.image;
+    }
+    if (p.type && p.type.trim()) {
+      catObj.types.add(p.type.trim());
+    }
+  });
+
+  // Transform into final array
+  const categories = Array.from(categoryMap.values()).map(c => ({
+    ...c,
+    types: Array.from(c.types),
+    startingPrice: c.startingPrice === Infinity ? 0 : c.startingPrice
+  }));
+
+  res.json({ success: true, categories });
+});
+
 // Admin uploads/creates a new product
 app.post('/api/products', upload.single('imageFile'), (req, res) => {
   const products = readJSON(PRODUCTS_FILE, []);
   
-  let imagePath = '/images/varkey.jpg';
+  let imagePath = '/images/varkey-square.jpg';
   if (req.file) {
     imagePath = '/images/' + req.file.filename;
   } else if (req.body.imageUrl && req.body.imageUrl.trim()) {
@@ -129,16 +178,22 @@ app.post('/api/products', upload.single('imageFile'), (req, res) => {
   }
 
   const slug = (req.body.name || 'item').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const catRaw = (req.body.category || 'general').trim();
+  const catSlug = catRaw.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const catName = req.body.categoryName || (catRaw.charAt(0).toUpperCase() + catRaw.slice(1));
+  const typeVal = (req.body.type || '').trim();
+
   const newProduct = {
     id: `${slug}-${Date.now().toString().slice(-4)}`,
     name: req.body.name || 'New Snack Item',
-    tamilName: req.body.tamilName || '',
-    category: req.body.category || 'snacks',
+    category: catSlug,
+    categoryName: catName,
+    type: typeVal,
     price: Number(req.body.price) || 0,
     unit: req.body.unit || '1 pack',
     weightInGrams: Number(req.body.weightInGrams) || 500,
     image: imagePath,
-    badge: req.body.badge || 'Fresh Batch',
+    badge: req.body.badge || '',
     description: req.body.description || 'Authentic Nilgiris specialty snack, prepared fresh.',
     inStock: req.body.inStock !== 'false' && req.body.inStock !== false,
     isHidden: false,
@@ -168,11 +223,17 @@ app.put('/api/products/:id', upload.single('imageFile'), (req, res) => {
     imagePath = req.body.imageUrl.trim();
   }
 
+  const catRaw = req.body.category !== undefined ? req.body.category.trim() : existing.category;
+  const catSlug = catRaw ? catRaw.toLowerCase().replace(/[^a-z0-9]+/g, '-') : existing.category;
+  const catName = req.body.categoryName !== undefined ? req.body.categoryName.trim() : (existing.categoryName || catRaw);
+  const typeVal = req.body.type !== undefined ? req.body.type.trim() : (existing.type || '');
+
   products[index] = {
     ...existing,
     name: req.body.name !== undefined ? req.body.name : existing.name,
-    tamilName: req.body.tamilName !== undefined ? req.body.tamilName : existing.tamilName,
-    category: req.body.category !== undefined ? req.body.category : existing.category,
+    category: catSlug,
+    categoryName: catName,
+    type: typeVal,
     price: req.body.price !== undefined ? Number(req.body.price) : existing.price,
     unit: req.body.unit !== undefined ? req.body.unit : existing.unit,
     weightInGrams: req.body.weightInGrams !== undefined ? Number(req.body.weightInGrams) : existing.weightInGrams,
@@ -341,8 +402,8 @@ app.post('/api/customer/otp/send', async (req, res) => {
     });
   }
 
-  // Generate a random 4-digit numeric OTP code
-  const otp = Math.floor(1000 + Math.random() * 9000).toString();
+  // Generate a random 6-digit numeric OTP code (Matching design mockup)
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
   const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutes real expiry
 
   // Store in memory
@@ -355,7 +416,7 @@ app.post('/api/customer/otp/send', async (req, res) => {
   });
 
   // Prepare Direct WhatsApp OTP dispatch link
-  const waMsg = encodeURIComponent(`🏔️ *OOTY HILLS SNACKS - LOGIN VERIFICATION*\n\nHello ${existingCust.name},\nYour Login Verification OTP code is: *${otp}*\n\nValid for 5 minutes. Do not share this OTP with anyone.\nEnjoy our freshly baked Ooty Varkey & Nilgiri teas! ☕🍪`);
+  const waMsg = encodeURIComponent(`🏔️ *HILL MADES SNACKS - LOGIN VERIFICATION*\n\nHello ${existingCust.name},\nYour Login Verification OTP code is: *${otp}*\n\nValid for 5 minutes. Do not share this OTP with anyone.\nEnjoy our freshly baked Ooty Varkey & Nilgiri teas! ☕🍪`);
   const whatsappOtpUrl = `https://wa.me/91${cleanPhone}?text=${waMsg}`;
 
   // Check if Fast2SMS API key is configured for real SIM SMS
@@ -363,7 +424,7 @@ app.post('/api/customer/otp/send', async (req, res) => {
 
   // Real log with prominent formatting
   console.log(`\n======================================================`);
-  console.log(`🔔 [REAL OTP DISPATCH - OOTY HILLS GATEWAY]`);
+  console.log(`🔔 [REAL OTP DISPATCH - HILL MADES GATEWAY]`);
   console.log(`👤 Customer: ${existingCust.name}`);
   console.log(`📱 Recipient Phone: +91 ${cleanPhone}`);
   console.log(`🔑 Verification Login OTP: >>> [ ${otp} ] <<<`);
@@ -430,7 +491,7 @@ app.post('/api/admin/test-sms', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Valid 10-digit mobile number required' });
   }
 
-  const testOtp = Math.floor(1000 + Math.random() * 9000).toString();
+  const testOtp = Math.floor(100000 + Math.random() * 900000).toString();
   const smsResult = await dispatchFast2Sms(cleanPhone, testOtp);
 
   res.json({
@@ -640,9 +701,9 @@ app.post('/api/orders', (req, res) => {
   let subtotal = 0;
   const verifiedItems = items.map(cartItem => {
     const prod = products.find(p => p.id === cartItem.id);
-    const unitPrice = prod ? prod.price : Number(cartItem.price);
+    const unitPrice = cartItem.price ? Number(cartItem.price) : (prod ? prod.price : 100);
     const name = prod ? prod.name : cartItem.name;
-    const unit = prod ? prod.unit : (cartItem.unit || '1 pack');
+    const unit = cartItem.unit || (prod ? prod.unit : '1 pack');
     const qty = Math.max(1, Number(cartItem.quantity) || 1);
     const lineTotal = unitPrice * qty;
     subtotal += lineTotal;
@@ -724,7 +785,7 @@ app.post('/api/orders', (req, res) => {
   const deliveryText = deliveryCharge === 0 ? 'FREE (Orders above ₹500)' : `₹${deliveryCharge}`;
 
   const whatsappMessage = 
-`🏔️ *NEW ORDER FROM OOTY HILLS SNACKS*
+`🏔️ *NEW ORDER FROM HILL MADES SNACKS*
 ━━━━━━━━━━━━━━━━━━━
 🆔 *Order ID:* #${orderId}
 📅 *Date:* ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}
@@ -733,7 +794,7 @@ app.post('/api/orders', (req, res) => {
 • *Name:* ${newOrder.customer.name}
 • *Phone:* ${newOrder.customer.phone}
 • *Delivery Address:* ${newOrder.customer.address}
-${newOrder.customer.landmark ? `• *Landmark:* ${newOrder.customer.landmark}\n` : ''}${newOrder.customer.pincode ? `• *Pincode:* ${newOrder.customer.pincode}\n` : ''}${newOrder.customer.notes ? `• *Special Notes:* ${newOrder.customer.notes}\n` : ''}
+${newOrder.customer.city ? `• *City:* ${newOrder.customer.city}\n` : ''}${newOrder.customer.landmark ? `• *Landmark:* ${newOrder.customer.landmark}\n` : ''}${newOrder.customer.pincode ? `• *Pincode:* ${newOrder.customer.pincode}\n` : ''}${newOrder.customer.notes ? `• *Special Notes:* ${newOrder.customer.notes}\n` : ''}
 🛒 *Ordered Items:*
 ${itemLines}
 
@@ -891,16 +952,26 @@ app.get(['/wishlist', '/pages/wishlist', '/my-wishlist'], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'wishlist.html'));
 });
 
+// Customer Dedicated Collections Route
+app.get(['/collections', '/collections.html', '/pages/collections'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'collections.html'));
+});
+
 // Customer Dedicated Shopping Cart Route
 app.get(['/cart', '/shopping-cart', '/bag'], (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'cart.html'));
 });
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`\n=================================================`);
-  console.log(`  Ooty Snacks Full-Stack Web App is Running!`);
-  console.log(`  Customer Store: http://localhost:${PORT}`);
-  console.log(`  Admin Panel:    http://localhost:${PORT}/admin`);
-  console.log(`=================================================\n`);
-});
+if (require.main === module) {
+  process.stdin.resume();
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n=================================================`);
+    console.log(`  Hill Mades Full-Stack Web App is Running!`);
+    console.log(`  Customer Store: http://localhost:${PORT}`);
+    console.log(`  Admin Panel:    http://localhost:${PORT}/admin`);
+    console.log(`=================================================\n`);
+  });
+}
+
+module.exports = app;

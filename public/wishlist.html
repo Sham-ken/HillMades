@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Wishlist | Ooty Hills Nilgiris Heritage</title>
-  <meta name="description" content="Save your favourite Nilgiris woodfired varkey, artisanal chocolates, and estate teas to your Ooty Hills wishlist.">
+  <title>My Wishlist | Hill Mades Nilgiris Heritage</title>
+  <meta name="description" content="Save your favourite Nilgiris woodfired varkey, artisanal chocolates, and estate teas to your Hill Mades wishlist.">
   
   <!-- Google Fonts: Cormorant Garamond & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,18 +16,18 @@
 </head>
 <body class="wishlist-page-body">
 
-  <!-- ==================== HEADER (EXACT OOTY HILLS BRANDING IN MENAGAII LUXURY LAYOUT) ==================== -->
+  <!-- ==================== HEADER (EXACT HILL MADES BRANDING IN MENAGAII LUXURY LAYOUT) ==================== -->
   <header class="site-header">
     <div class="container">
       <div class="header-inner">
-        <!-- Ooty Hills Brand Logo -->
+        <!-- Hill Mades Brand Logo -->
         <a href="/" class="brand-logo" id="mainBrandLogo">
-          <svg class="brand-emblem" viewBox="0 0 100 100">
+          <svg class="brand-emblem" viewBox="0 0 100 100" width="42" height="42" style="width: 42px; height: 42px; max-width: 42px; color: #8B1A1A;">
             <path d="M50 12 C52 32 72 45 88 45 C72 55 62 76 50 88 C38 76 28 55 12 45 C28 45 48 32 50 12 Z" fill="none" stroke="currentColor" stroke-width="4.5"/>
             <circle cx="50" cy="48" r="9" fill="currentColor"/>
           </svg>
           <div class="brand-text">
-            <h1>Ooty Hills</h1>
+            <h1>Hill Mades</h1>
             <span>Nilgiris Heritage</span>
           </div>
         </a>
@@ -41,16 +41,99 @@
             <li class="nav-item">
               <a href="/shop.html" class="nav-link">Shop</a>
             </li>
-            <li class="nav-item">
-              <a href="/shop.html" class="nav-link">
-                Collections
+                        <li class="nav-item has-collections-dropdown">
+              <a href="/collections.html" class="nav-link">
+                COLLECTIONS
                 <svg class="caret-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
               </a>
-              <div class="dropdown-menu">
-                <a href="/shop.html?cat=snacks">🥖 Ooty Varkey & Bakery</a>
-                <a href="/shop.html?cat=chocolates">🍫 Homemade Chocolates</a>
-                <a href="/shop.html?cat=beverages">☕ Estate Tea & Coffee</a>
-                <a href="/shop.html?cat=biscuits">🍪 Crispy Salt Biscuits</a>
+              <div class="collections-dropdown-wrapper">
+                <!-- Card 1: Left Categories (Screenshot 2) -->
+                <div class="collections-primary-card">
+                  <a href="/shop.html?cat=varkey" class="collections-primary-link active" data-cat="varkey">
+                    <span>Vareky</span>
+                  </a>
+                  <a href="/shop.html?cat=tea" class="collections-primary-link" data-cat="tea">
+                    <span>Tea Thool</span>
+                  </a>
+                  <a href="/shop.html?cat=coffee" class="collections-primary-link" data-cat="coffee">
+                    <span>Coffee Thool</span>
+                  </a>
+                  <a href="/shop.html?cat=chocolates" class="collections-primary-link" data-cat="chocolates">
+                    <span>Homemade Chocolate</span>
+                  </a>
+                  <a href="/shop.html?cat=biscuits" class="collections-primary-link" data-cat="biscuits">
+                    <span>Salt Biscuits</span>
+                  </a>
+                </div>
+
+                <!-- Card 2: Right Sub-Items (Screenshot 2) -->
+                <!-- 1. Vareky -->
+                <div class="collections-secondary-card active" data-cat="varkey">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Vareky</span>
+                    <a href="/shop.html?cat=varkey" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Square" class="submenu-type-link">Square</a></li>
+                    <li><a href="/shop.html?type=Round" class="submenu-type-link">Round</a></li>
+                    <li><a href="/shop.html?type=Oval" class="submenu-type-link">Oval</a></li>
+                  </ul>
+                </div>
+
+                <!-- 2. Tea Thool -->
+                <div class="collections-secondary-card" data-cat="tea">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Tea Thool</span>
+                    <a href="/shop.html?cat=tea" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Kannavarai" class="submenu-type-link">Kannavarai</a></li>
+                    <li><a href="/shop.html?type=River+Side" class="submenu-type-link">River Side</a></li>
+                    <li><a href="/shop.html?type=Darmoda" class="submenu-type-link">Darmoda</a></li>
+                    <li><a href="/shop.html?type=Pandiyan+CTC+Tea" class="submenu-type-link">Pandiyan CTC Tea</a></li>
+                  </ul>
+                </div>
+
+                <!-- 3. Coffee Thool -->
+                <div class="collections-secondary-card" data-cat="coffee">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Coffee Thool</span>
+                    <a href="/shop.html?cat=coffee" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=3+Roses" class="submenu-type-link">3 Roses</a></li>
+                    <li><a href="/shop.html?type=Sunrise" class="submenu-type-link">Sunrise</a></li>
+                    <li><a href="/shop.html?type=BRU" class="submenu-type-link">BRU</a></li>
+                    <li><a href="/shop.html?type=Levista" class="submenu-type-link">Levista</a></li>
+                  </ul>
+                </div>
+
+                <!-- 4. Homemade Chocolate -->
+                <div class="collections-secondary-card" data-cat="chocolates">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Homemade Chocolate</span>
+                    <a href="/shop.html?cat=chocolates" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Dark+Chocolate" class="submenu-type-link">Dark Chocolate</a></li>
+                    <li><a href="/shop.html?type=Milk+Chocolate" class="submenu-type-link">Milk Chocolate</a></li>
+                    <li><a href="/shop.html?type=White+Chocolate" class="submenu-type-link">White Chocolate</a></li>
+                    <li><a href="/shop.html?type=Nut+%26+Fruit+Clusters+%2F+Barks" class="submenu-type-link">Nut & Fruit Clusters / Barks</a></li>
+                  </ul>
+                </div>
+
+                <!-- 5. Salt Biscuits -->
+                <div class="collections-secondary-card" data-cat="biscuits">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Salt Biscuits</span>
+                    <a href="/shop.html?cat=biscuits" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Classic+Salt+Biscuits" class="submenu-type-link">Classic Salt Biscuits</a></li>
+                    <li><a href="/shop.html?type=Jeera+Salt+Biscuits" class="submenu-type-link">Jeera Salt Biscuits</a></li>
+                    <li><a href="/shop.html?type=Mountain+Butter+Salt+Biscuits" class="submenu-type-link">Mountain Butter Salt Biscuits</a></li>
+                  </ul>
+                </div>
               </div>
             </li>
             <li class="nav-item">
@@ -86,23 +169,18 @@
               </div>
 
               <ul class="account-menu-list">
+                
                 <li class="account-menu-item">
-                  <a href="/account" class="account-menu-link" style="color: var(--brand-primary); font-weight: 700; background: #fafaf9; border-bottom: 1px solid var(--border-light);">
-                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    <span>Full Customer Portal ↗</span>
+                  <a href="/account?tab=orders" class="account-menu-link" id="menuActionOrders" onclick="handleMenuNavOrders(event)">
+                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <span>My Orders</span>
                   </a>
                 </li>
                 <li class="account-menu-item">
-                  <button type="button" class="account-menu-link" id="menuActionOrders">
-                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                    <span>My Orders</span>
-                  </button>
-                </li>
-                <li class="account-menu-item">
-                  <button type="button" class="account-menu-link" id="menuActionAddresses">
+                  <a href="/account?tab=addresses" class="account-menu-link" id="menuActionAddresses" onclick="handleMenuNavAddresses(event)">
                     <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     <span>My Addresses</span>
-                  </button>
+                  </a>
                 </li>
                 <li class="account-menu-item">
                   <a href="/wishlist" class="account-menu-link" id="menuActionWishlist">
@@ -170,10 +248,10 @@
     </div>
   </main>
 
-  <!-- ==================== FOOTER (ELEGANT LIGHT AESTHETIC - OOTY HILLS BRANDING) ==================== -->
+  <!-- ==================== FOOTER (ELEGANT LIGHT AESTHETIC - HILL MADES BRANDING) ==================== -->
   <footer class="menagaii-light-footer">
     <div class="menagaii-footer-grid">
-      <!-- Col 1: Ooty Hills Brand & Contact -->
+      <!-- Col 1: Hill Mades Brand & Contact -->
       <div class="menagaii-footer-brand-col">
         <a href="/" class="brand-logo" style="margin-bottom: 6px;">
           <svg class="brand-emblem" viewBox="0 0 100 100" style="width: 34px; height: 34px;">
@@ -181,14 +259,14 @@
             <circle cx="50" cy="48" r="9" fill="currentColor"/>
           </svg>
           <div class="brand-text">
-            <h1 style="font-size: 1.6rem; color: #7B181E;">Ooty Hills</h1>
+            <h1 style="font-size: 1.6rem; color: #7B181E;">Hill Mades</h1>
             <span style="font-size: 0.58rem; letter-spacing: 2px;">Nilgiris Heritage</span>
           </div>
         </a>
         <p style="font-size: 0.82rem; color: #64748b; line-height: 1.5; margin: 4px 0 8px;">
           Authentic woodfired Ooty varkey, homemade chocolates & high-grown estate teas direct to your doorstep.
         </p>
-        <a href="mailto:orders@ootyhills.com" class="menagaii-footer-email">orders@ootyhills.com</a>
+        <a href="mailto:orders@hillmades.com" class="menagaii-footer-email">orders@hillmades.com</a>
         <span style="font-size: 0.8rem; color: #78716c; margin-top: 2px;">💬 WhatsApp: +91 93457 38268</span>
       </div>
 
@@ -240,7 +318,7 @@
     </div>
 
     <div style="max-width: 1200px; margin: 30px auto 0; padding: 20px 20px 0; border-top: 1px solid rgba(0,0,0,0.06); text-align: center; font-size: 0.8rem; color: #8c827a;">
-      <p>&copy; 2026 Ooty Hills Snacks & Chocolates. Nilgiris Heritage. All rights reserved.</p>
+      <p>&copy; 2026 Hill Mades Snacks & Chocolates. Nilgiris Heritage. All rights reserved.</p>
     </div>
   </footer>
 
@@ -326,7 +404,7 @@
             </div>
           </div>
           <button type="submit" class="btn-checkout-whatsapp" style="width: 100%; margin-top: 10px; padding: 14px;">
-            <span>💬</span> Confirm & Send Order to WhatsApp
+            <span>💬</span> (Confirm and Send to WhatsApp)
           </button>
         </form>
       </div>
@@ -340,6 +418,11 @@
     function renderDedicatedWishlistPage() {
       const container = document.getElementById('wishlistDynamicContainer');
       if (!container) return;
+
+      // Ensure wishlist is sanitized and UI badges are synchronized
+      if (typeof updateWishlistUI === 'function') {
+        updateWishlistUI();
+      }
 
       const items = (typeof storeState !== 'undefined' && storeState.products)
         ? storeState.products.filter(p => storeState.wishlist && storeState.wishlist.includes(p.id))
@@ -379,7 +462,7 @@
                         <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
                         <span>GO TO CART</span>
                       </button>
-                      <button type="button" class="btn-wishlist-delete-trash" onclick="toggleWishlist('${p.id}', event); renderDedicatedWishlistPage();" title="Remove from Wishlist" aria-label="Delete">
+                      <button type="button" class="btn-wishlist-delete-trash" onclick="promptRemoveWishlistItem('${p.id}', event)" title="Remove from Wishlist" aria-label="Delete">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8">
                           <polyline points="3 6 5 6 21 6"></polyline>
                           <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -395,7 +478,7 @@
         return;
       }
 
-      // EMPTY WISHLIST STATE - ADAPTED FOR OOTY HILLS
+      // EMPTY WISHLIST STATE - ADAPTED FOR HILL MADES
       if (!isLoggedIn) {
         // STATE 1: WITHOUT LOGIN (Reference Screenshot 1)
         container.innerHTML = `
@@ -451,7 +534,8 @@
       if (confirm('Clear all items from your wishlist?')) {
         if (typeof storeState !== 'undefined') {
           storeState.wishlist = [];
-          localStorage.setItem('ooty_wishlist', JSON.stringify([]));
+          if (typeof saveWishlistToStorage === 'function') saveWishlistToStorage();
+          else if (typeof window.saveWishlistToStorage === 'function') window.saveWishlistToStorage();
           if (typeof updateWishlistUI === 'function') updateWishlistUI();
         }
         renderDedicatedWishlistPage();
@@ -459,7 +543,16 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(renderDedicatedWishlistPage, 80);
+      renderDedicatedWishlistPage();
+      // Poll briefly until products are fully loaded from the server
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if ((typeof storeState !== 'undefined' && storeState.products && storeState.products.length > 0) || attempts > 25) {
+          clearInterval(interval);
+          renderDedicatedWishlistPage();
+        }
+      }, 50);
     });
   </script>
 </body>

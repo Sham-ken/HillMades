@@ -1,11 +1,11 @@
 [
   {
     "id": "CUST-3210",
-    "name": "Sham Sanjay",
+    "name": "Test Customer",
     "phone": "9876543210",
-    "address": "45 Nilgiri Pine View Road, Doddabetta Lane",
+    "address": "123 Mountain View Road",
     "city": "Ooty",
-    "pincode": "643002",
+    "pincode": "643001",
     "landmark": "Near View Point",
     "registeredAt": "2026-10-19T16:07:13.096Z",
     "lastLoginAt": "2026-10-21T09:58:13.606Z",
@@ -55,13 +55,13 @@
   },
   {
     "id": "CUST-8268",
-    "name": "Sham Sanjay",
+    "name": "Sanjay",
     "phone": "9345738268",
-    "address": "zsddafbvafdbafbaedb",
+    "address": "12 Hill View",
     "city": "Ooty",
     "pincode": "643001",
     "registeredAt": "2026-10-20T11:50:40.154Z",
-    "lastLoginAt": "2026-10-21T15:17:17.929Z"
+    "lastLoginAt": "2026-11-17T08:06:56.939Z"
   },
   {
     "id": "CUST-2740",
@@ -128,5 +128,37 @@
     "landmark": "",
     "registeredAt": "2026-10-21T15:40:35.619Z",
     "lastLoginAt": "2026-10-21T15:40:56.392Z"
+  },
+  {
+    "id": "CUST-1346",
+    "name": "gokul",
+    "phone": "6369631346",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-11-17T06:25:58.163Z",
+    "lastLoginAt": "2026-11-17T06:52:22.713Z"
+  },
+  {
+    "id": "CUST-9454",
+    "name": "Sham Sanjay",
+    "phone": "8949849454",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-11-17T14:33:30.216Z"
+  },
+  {
+    "id": "CUST-1562",
+    "name": "sri",
+    "phone": "7956261562",
+    "address": "1/115 kenthorai village and post the nilgiris",
+    "city": "ooty",
+    "pincode": "643002",
+    "landmark": "",
+    "registeredAt": "2026-11-17T14:34:12.376Z",
+    "lastLoginAt": "2026-11-17T14:34:22.015Z"
   }
 ]

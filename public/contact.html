@@ -1,20 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us | Ooty Hills Snacks & Nilgiris Bakery</title>
+  <title>Contact Us | Hill Mades Snacks & Nilgiris Bakery</title>
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏔️</text></svg>">
 </head>
-<body>
 
-  <!-- ==================== TOP LUXURY ANNOUNCEMENT TICKER ==================== -->
-  <div class="top-announcement-bar">
-    <div class="container announcement-inner">
-      <span>✦ COMPLIMENTARY EXPRESS SHIPPING ON ORDERS OVER ₹500 • 100% PURE VEGETARIAN NILGIRIS BAKES ✦</span>
-    </div>
-  </div>
+<body>
 
   <!-- ==================== HEADER (EXACT MENAGAII STYLE) ==================== -->
   <header class="site-header">
@@ -22,12 +18,14 @@
       <div class="header-inner">
         <!-- Logo -->
         <a href="/" class="brand-logo" id="mainBrandLogo">
-          <svg class="brand-emblem" viewBox="0 0 100 100">
-            <path d="M50 12 C52 32 72 45 88 45 C72 55 62 76 50 88 C38 76 28 55 12 45 C28 45 48 32 50 12 Z" fill="none" stroke="currentColor" stroke-width="4.5"/>
-            <circle cx="50" cy="48" r="9" fill="currentColor"/>
+          <svg class="brand-emblem" viewBox="0 0 100 100" width="42" height="42"
+            style="width: 42px; height: 42px; max-width: 42px; color: #8B1A1A;">
+            <path d="M50 12 C52 32 72 45 88 45 C72 55 62 76 50 88 C38 76 28 55 12 45 C28 45 48 32 50 12 Z" fill="none"
+              stroke="currentColor" stroke-width="4.5" />
+            <circle cx="50" cy="48" r="9" fill="currentColor" />
           </svg>
           <div class="brand-text">
-            <h1>Ooty Hills</h1>
+            <h1>Hill Mades</h1>
             <span>Nilgiris Heritage</span>
           </div>
         </a>
@@ -41,16 +39,105 @@
             <li class="nav-item">
               <a href="/shop.html" class="nav-link">Shop</a>
             </li>
-            <li class="nav-item">
-              <a href="/shop.html" class="nav-link">
-                Collections
-                <svg class="caret-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <li class="nav-item has-collections-dropdown">
+              <a href="/collections.html" class="nav-link">
+                COLLECTIONS
+                <svg class="caret-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
               </a>
-              <div class="dropdown-menu">
-                <a href="/shop.html?cat=snacks">🥖 Ooty Varkey & Bakery</a>
-                <a href="/shop.html?cat=chocolates">🍫 Homemade Chocolates</a>
-                <a href="/shop.html?cat=beverages">☕ Estate Tea & Coffee</a>
-                <a href="/shop.html?cat=biscuits">🍪 Crispy Salt Biscuits</a>
+              <div class="collections-dropdown-wrapper">
+                <!-- Card 1: Left Categories (Screenshot 2) -->
+                <div class="collections-primary-card">
+                  <a href="/shop.html?cat=varkey" class="collections-primary-link active" data-cat="varkey">
+                    <span>Vareky</span>
+                  </a>
+                  <a href="/shop.html?cat=tea" class="collections-primary-link" data-cat="tea">
+                    <span>Tea Thool</span>
+                  </a>
+                  <a href="/shop.html?cat=coffee" class="collections-primary-link" data-cat="coffee">
+                    <span>Coffee Thool</span>
+                  </a>
+                  <a href="/shop.html?cat=chocolates" class="collections-primary-link" data-cat="chocolates">
+                    <span>Homemade Chocolate</span>
+                  </a>
+                  <a href="/shop.html?cat=biscuits" class="collections-primary-link" data-cat="biscuits">
+                    <span>Salt Biscuits</span>
+                  </a>
+                </div>
+
+                <!-- Card 2: Right Sub-Items (Screenshot 2) -->
+                <!-- 1. Vareky -->
+                <div class="collections-secondary-card active" data-cat="varkey">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Vareky</span>
+                    <a href="/shop.html?cat=varkey" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Square" class="submenu-type-link">Square</a></li>
+                    <li><a href="/shop.html?type=Round" class="submenu-type-link">Round</a></li>
+                    <li><a href="/shop.html?type=Oval" class="submenu-type-link">Oval</a></li>
+                  </ul>
+                </div>
+
+                <!-- 2. Tea Thool -->
+                <div class="collections-secondary-card" data-cat="tea">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Tea Thool</span>
+                    <a href="/shop.html?cat=tea" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Kannavarai" class="submenu-type-link">Kannavarai</a></li>
+                    <li><a href="/shop.html?type=River+Side" class="submenu-type-link">River Side</a></li>
+                    <li><a href="/shop.html?type=Darmoda" class="submenu-type-link">Darmoda</a></li>
+                    <li><a href="/shop.html?type=Pandiyan+CTC+Tea" class="submenu-type-link">Pandiyan CTC Tea</a></li>
+                  </ul>
+                </div>
+
+                <!-- 3. Coffee Thool -->
+                <div class="collections-secondary-card" data-cat="coffee">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Coffee Thool</span>
+                    <a href="/shop.html?cat=coffee" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=3+Roses" class="submenu-type-link">3 Roses</a></li>
+                    <li><a href="/shop.html?type=Sunrise" class="submenu-type-link">Sunrise</a></li>
+                    <li><a href="/shop.html?type=BRU" class="submenu-type-link">BRU</a></li>
+                    <li><a href="/shop.html?type=Levista" class="submenu-type-link">Levista</a></li>
+                  </ul>
+                </div>
+
+                <!-- 4. Homemade Chocolate -->
+                <div class="collections-secondary-card" data-cat="chocolates">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Homemade Chocolate</span>
+                    <a href="/shop.html?cat=chocolates" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Dark+Chocolate" class="submenu-type-link">Dark Chocolate</a></li>
+                    <li><a href="/shop.html?type=Milk+Chocolate" class="submenu-type-link">Milk Chocolate</a></li>
+                    <li><a href="/shop.html?type=White+Chocolate" class="submenu-type-link">White Chocolate</a></li>
+                    <li><a href="/shop.html?type=Nut+%26+Fruit+Clusters+%2F+Barks" class="submenu-type-link">Nut & Fruit
+                        Clusters / Barks</a></li>
+                  </ul>
+                </div>
+
+                <!-- 5. Salt Biscuits -->
+                <div class="collections-secondary-card" data-cat="biscuits">
+                  <div class="submenu-header-row">
+                    <span class="submenu-category-title">All Salt Biscuits</span>
+                    <a href="/shop.html?cat=biscuits" class="submenu-view-all-pill">VIEW ALL</a>
+                  </div>
+                  <ul class="submenu-types-list">
+                    <li><a href="/shop.html?type=Classic+Salt+Biscuits" class="submenu-type-link">Classic Salt
+                        Biscuits</a></li>
+                    <li><a href="/shop.html?type=Jeera+Salt+Biscuits" class="submenu-type-link">Jeera Salt Biscuits</a>
+                    </li>
+                    <li><a href="/shop.html?type=Mountain+Butter+Salt+Biscuits" class="submenu-type-link">Mountain
+                        Butter Salt Biscuits</a></li>
+                  </ul>
+                </div>
               </div>
             </li>
             <li class="nav-item">
@@ -69,14 +156,20 @@
         <div class="header-actions">
           <div class="account-wrapper">
             <button type="button" class="icon-btn" id="btnUserAccount" title="Account / Profile" aria-label="Account">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"></circle><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path></svg>
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="7" r="4"></circle>
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              </svg>
             </button>
 
             <!-- Menagaii Luxury Dropdown Card -->
             <div class="account-dropdown-card" id="accountDropdownCard">
               <div class="account-card-header">
                 <div class="account-avatar-gold">
-                  <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  <svg viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
                 </div>
                 <div class="account-header-info">
                   <h4 id="accountHeaderName">My Account</h4>
@@ -85,40 +178,57 @@
               </div>
 
               <ul class="account-menu-list">
+
                 <li class="account-menu-item">
-                  <a href="/account" class="account-menu-link" style="color: var(--brand-primary); font-weight: 700; background: #fafaf9; border-bottom: 1px solid var(--border-light);">
-                    <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                    <span>Full Customer Portal ↗</span>
+                  <a href="/account?tab=orders" class="account-menu-link" id="menuActionOrders" onclick="handleMenuNavOrders(event)">
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                      </path>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                      <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    <span>My Orders</span>
                   </a>
                 </li>
                 <li class="account-menu-item">
-                  <button type="button" class="account-menu-link" id="menuActionOrders">
-                    <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                    <span>My Orders</span>
-                  </button>
-                </li>
-                <li class="account-menu-item">
-                  <button type="button" class="account-menu-link" id="menuActionAddresses">
-                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <a href="/account?tab=addresses" class="account-menu-link" id="menuActionAddresses" onclick="handleMenuNavAddresses(event)">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
                     <span>My Addresses</span>
-                  </button>
+                  </a>
                 </li>
                 <li class="account-menu-item">
                   <button type="button" class="account-menu-link" id="menuActionWishlist">
-                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <svg viewBox="0 0 24 24">
+                      <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                      </path>
+                    </svg>
                     <span>My Wishlist</span>
-                    <span class="menu-badge" id="menuWishlistCount" style="margin-left: auto; background: #fee2e2; color: #b91c1c; font-size: 0.72rem; font-weight: 700; padding: 1px 7px; border-radius: 99px; display: none;">0</span>
+                    <span class="menu-badge" id="menuWishlistCount"
+                      style="margin-left: auto; background: #fee2e2; color: #b91c1c; font-size: 0.72rem; font-weight: 700; padding: 1px 7px; border-radius: 99px; display: none;">0</span>
                   </button>
                 </li>
                 <li class="account-menu-item">
                   <button type="button" class="account-menu-link" id="menuActionCart">
-                    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <svg viewBox="0 0 24 24">
+                      <circle cx="9" cy="21" r="1"></circle>
+                      <circle cx="20" cy="21" r="1"></circle>
+                      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
                     <span>Shopping Cart</span>
                   </button>
                 </li>
                 <li class="account-menu-item">
                   <button type="button" class="account-menu-link login-row" id="menuActionAuth">
-                    <svg id="authRowIcon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                    <svg id="authRowIcon" viewBox="0 0 24 24">
+                      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                      <polyline points="10 17 15 12 10 7"></polyline>
+                      <line x1="15" y1="12" x2="3" y2="12"></line>
+                    </svg>
                     <span id="authRowText">Login</span>
                   </button>
                 </li>
@@ -126,19 +236,30 @@
             </div>
           </div>
           <button type="button" class="icon-btn" id="btnWishlist" title="Wishlist" aria-label="Wishlist">
-            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+              </path>
+            </svg>
           </button>
           <button type="button" class="icon-btn" id="btnHeaderCart" title="Shopping Bag" aria-label="Cart">
-            <svg viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="13" rx="2"></rect><path d="M9 8V6a3 3 0 0 1 6 0v2"></path></svg>
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="8" width="16" height="13" rx="2"></rect>
+              <path d="M9 8V6a3 3 0 0 1 6 0v2"></path>
+            </svg>
             <span class="cart-icon-badge" id="cartBadgeCount">0</span>
           </button>
           <button type="button" class="icon-btn" id="btnHeaderSearch" title="Search Catalog" aria-label="Search">
-            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7.5"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+            <svg viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7.5"></circle>
+              <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+            </svg>
           </button>
 
           <!-- 5. Hamburger Navigation Menu Toggle & Dropdown (User Reference) -->
           <div class="header-menu-wrapper">
-            <button type="button" class="icon-btn btn-header-menu-toggle" id="btnHeaderMenuToggle" title="Open Navigation Menu" aria-label="Menu" aria-expanded="false">
+            <button type="button" class="icon-btn btn-header-menu-toggle" id="btnHeaderMenuToggle"
+              title="Open Navigation Menu" aria-label="Menu" aria-expanded="false">
               <svg class="hamburger-icon" viewBox="0 0 24 24">
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -155,7 +276,8 @@
                     <circle cx="11" cy="11" r="7.5"></circle>
                     <line x1="16.5" y1="16.5" x2="21" y2="21"></line>
                   </svg>
-                  <input type="text" class="menu-dropdown-search-input" placeholder="Search snacks, chocolates, tea..." autocomplete="off">
+                  <input type="text" class="menu-dropdown-search-input" placeholder="Search snacks, chocolates, tea..."
+                    autocomplete="off">
                 </form>
               </div>
 
@@ -168,18 +290,22 @@
                   <a href="/shop.html" class="menu-dropdown-link">SHOP</a>
                 </li>
                 <li class="menu-dropdown-item has-subitems">
-                  <button type="button" class="menu-dropdown-link menu-dropdown-accordion-btn" id="btnDropdownCollectionsToggle">
+                  <button type="button" class="menu-dropdown-link menu-dropdown-accordion-btn"
+                    id="btnDropdownCollectionsToggle">
                     <span>COLLECTIONS</span>
                     <svg class="menu-chevron-icon" viewBox="0 0 24 24">
                       <polyline points="6 9 12 15 18 9"></polyline>
                     </svg>
                   </button>
                   <ul class="menu-dropdown-sublist" id="menuDropdownCollectionsList">
-                    <li><a href="/shop.html">✦ All Nilgiri Delights</a></li>
-                    <li><a href="/shop.html?cat=snacks">🥖 Ooty Varkey & Crisps</a></li>
-                    <li><a href="/shop.html?cat=chocolates">🍫 Homemade Chocolates</a></li>
-                    <li><a href="/shop.html?cat=beverages">☕ Estate Tea & Coffee</a></li>
-                    <li><a href="/shop.html?cat=biscuits">🍪 Crispy Salt Biscuits</a></li>
+                    <li><a href="/shop.html">✦ All Delicacies (View All)</a></li>
+                    <li><a href="/shop.html?cat=varkey">1. Vareky (Square, Round, Oval)</a></li>
+                    <li><a href="/shop.html?cat=tea">2. Tea Thool (Estate Blends)</a></li>
+                    <li><a href="/shop.html?cat=coffee">3. Coffee Thool (Roasts)</a></li>
+                    <li><a href="/shop.html?cat=chocolates">4. Homemade Chocolate (Barks & Clusters)</a></li>
+                    <li><a href="/shop.html?cat=biscuits">5. Salt Biscuits (Mountain Crisps)</a></li>
+                    <li><a href="/collections.html" style="color: var(--brand-primary); font-weight: 700;">★ View
+                        Curated Collections Page ➔</a></li>
                   </ul>
                 </li>
                 <li class="menu-dropdown-item">
@@ -210,7 +336,8 @@
   </header>
 
   <!-- Page Header -->
-  <div style="background: white; border-bottom: 1px solid var(--border-light); padding: 50px 0 35px; text-align: center;">
+  <div
+    style="background: white; border-bottom: 1px solid var(--border-light); padding: 50px 0 35px; text-align: center;">
     <div class="container">
       <span class="section-eyebrow">Get in Touch</span>
       <h1 class="section-title">Contact Our Nilgiris Bakery</h1>
@@ -222,45 +349,61 @@
     <div class="container">
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
         <!-- Contact Info Card -->
-        <div style="background: white; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 36px; box-shadow: var(--shadow-card);">
-          <h3 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--brand-burgundy); margin-bottom: 16px;">100% Online Store</h3>
-          
+        <div
+          style="background: white; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 36px; box-shadow: var(--shadow-card);">
+          <h3
+            style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--brand-burgundy); margin-bottom: 16px;">
+            100% Online Store</h3>
+
           <div style="margin-bottom: 20px;">
-            <strong style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">🌐 Online Direct Operations</strong>
+            <strong
+              style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">🌐
+              Online Direct Operations</strong>
             <p style="color: var(--text-secondary); font-size: 0.95rem;">
-              We operate exclusively online without a walk-in retail store. Every order is freshly prepared in Ooty, Nilgiris and dispatched directly to your doorstep across India.
+              We operate exclusively online without a walk-in retail store. Every order is freshly prepared in Ooty,
+              Nilgiris and dispatched directly to your doorstep across India.
             </p>
           </div>
 
           <div style="margin-bottom: 20px;">
-            <strong style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">🌲 Direct Dispatch Origin</strong>
+            <strong
+              style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">🌲
+              Direct Dispatch Origin</strong>
             <p style="color: var(--text-secondary); font-size: 0.95rem;">
               Dispatched fresh from Ooty (Udhagamandalam), The Nilgiris, Tamil Nadu.
             </p>
           </div>
 
           <div style="margin-bottom: 20px;">
-            <strong style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">💬 WhatsApp Support & Orders</strong>
+            <strong
+              style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">💬
+              WhatsApp Support & Orders</strong>
             <p style="color: var(--text-secondary); font-size: 0.95rem;" id="contactWhatsappDisplay">
               Available 7 days a week: 8:00 AM - 9:00 PM
             </p>
           </div>
 
           <div style="margin-bottom: 24px;">
-            <strong style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">🚚 Pan-India Shipping</strong>
+            <strong
+              style="display: block; font-size: 0.82rem; text-transform: uppercase; color: var(--accent-gold); letter-spacing: 1px; margin-bottom: 4px;">🚚
+              Pan-India Shipping</strong>
             <p style="color: var(--text-secondary); font-size: 0.95rem;">
               We dispatch orders via Express Speed Post and private logistics with moisture-proof food packaging.
             </p>
           </div>
 
-          <a href="#" id="btnDirectWhatsAppContact" target="_blank" class="btn-checkout-whatsapp" style="text-decoration: none; width: auto; display: inline-flex; padding: 12px 24px;">
+          <a href="https://wa.me/919345738268?text=Hello%20Hill%20Mades!%20I%20have%20an%20inquiry%20about%20your%20Nilgiri%20delicacies." id="btnDirectWhatsAppContact" target="_blank" class="btn-checkout-whatsapp"
+            style="text-decoration: none; width: auto; display: inline-flex; padding: 12px 24px;">
             <span>💬</span> Chat with Us on WhatsApp
           </a>
         </div>
 
         <!-- Feedback / Message Form -->
-        <div style="background: white; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 36px; box-shadow: var(--shadow-card);">
-          <h3 style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--brand-burgundy); margin-bottom: 6px;">Leave Customer Feedback / Inquiry</h3>
+        <div
+          style="background: white; border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 36px; box-shadow: var(--shadow-card);">
+          <h3
+            style="font-family: var(--font-serif); font-size: 1.45rem; color: var(--brand-burgundy); margin-bottom: 6px;">
+            Leave Customer Feedback / Inquiry</h3>
           <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
             Have you tasted our snacks? Share your rating and review with our master bakers!
           </p>
@@ -268,7 +411,7 @@
           <form id="contactFeedbackForm">
             <div class="form-group">
               <label class="form-label" for="fbName">Your Name *</label>
-              <input type="text" id="fbName" class="form-control" placeholder="e.g. Anand Kumar" required>
+              <input type="text" id="fbName" class="form-control" placeholder="e.g. Sham" required>
             </div>
 
             <div class="form-group">
@@ -277,12 +420,18 @@
                 <option value="5">⭐⭐⭐⭐⭐ Excellent (5 Stars)</option>
                 <option value="4">⭐⭐⭐⭐ Very Good (4 Stars)</option>
                 <option value="3">⭐⭐⭐ Good (3 Stars)</option>
+                <option value="2">⭐⭐ Average (2 Stars)</option>
+                <option value="1">⭐ Poor (1 Stars)</option>
+
+
+
               </select>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="fbComment">Your Message / Review *</label>
-              <textarea id="fbComment" class="form-control" rows="3" placeholder="Tell us how you enjoyed the Varkey or Chocolates..." required></textarea>
+              <textarea id="fbComment" class="form-control" rows="3"
+                placeholder="Tell us how you enjoyed the Varkey or Chocolates..." required></textarea>
             </div>
 
             <button type="submit" class="btn-luxury-primary" style="width: 100%; border: none;">
@@ -336,11 +485,13 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="custPhone">WhatsApp Phone Number *</label>
-            <input type="tel" id="custPhone" class="form-control" placeholder="e.g. 9876543210 (10 digits)" pattern="[0-9]{10}" required>
+            <input type="tel" id="custPhone" class="form-control" placeholder="e.g. 9876543210 (10 digits)"
+              pattern="[0-9]{10}" required>
           </div>
           <div class="form-group">
             <label class="form-label" for="custAddress">Delivery Address *</label>
-            <textarea id="custAddress" class="form-control" rows="2" placeholder="House/Flat number, Street, Area" required></textarea>
+            <textarea id="custAddress" class="form-control" rows="2" placeholder="House/Flat number, Street, Area"
+              required></textarea>
           </div>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div class="form-group">
@@ -349,7 +500,8 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="custPincode">Pincode *</label>
-              <input type="text" id="custPincode" class="form-control" placeholder="e.g. 643001" pattern="[0-9]{6}" required>
+              <input type="text" id="custPincode" class="form-control" placeholder="e.g. 643001" pattern="[0-9]{6}"
+                required>
             </div>
           </div>
           <div class="form-group">
@@ -360,7 +512,7 @@
             </select>
           </div>
           <button type="submit" class="btn-checkout-whatsapp" style="width: 100%; margin-top: 10px; padding: 14px;">
-            <span>💬</span> Confirm & Send Order to WhatsApp
+            <span>💬</span> (Confirm and Send to WhatsApp)
           </button>
         </form>
       </div>
@@ -387,102 +539,107 @@
         <button type="button" class="btn-close-drawer btn-modal-close">✕</button>
       </div>
       <div class="modal-body">
-        <input type="text" id="globalSearchInput" class="form-control" placeholder="Search Varkey, Chocolate, Tea..." autofocus>
+        <input type="text" id="globalSearchInput" class="form-control" placeholder="Search Varkey, Chocolate, Tea..."
+          autofocus>
         <div id="searchResultList" style="margin-top: 16px; max-height: 300px; overflow-y: auto;"></div>
       </div>
     </div>
+  </div>
+
   <!-- Wishlist Modal -->
   <div class="modal-overlay" id="wishlistModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>My Wishlist 🤍</h3>
-        <button type="button" class="btn-close-drawer btn-modal-close">✕</button>
-      </div>
-      <div class="modal-body">
-        <div id="wishlistItemsList" style="max-height: 360px; overflow-y: auto;"></div>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- Customer Saved Addresses Modal -->
-  <div class="modal-overlay" id="customerAddressModal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>My Saved Address 📍</h3>
-        <button type="button" class="btn-close-drawer btn-modal-close">✕</button>
-      </div>
-      <div class="modal-body">
-        <div id="addressContentBox"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <h3>Ooty Hills</h3>
-          <p>Authentic hill station baking and estate teas delivered directly to your doorstep.</p>
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>My Wishlist 🤍</h3>
+          <button type="button" class="btn-close-drawer btn-modal-close">✕</button>
         </div>
-        <div class="footer-col">
-          <h4>Navigation</h4>
-          <ul class="footer-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/shop.html">Shop Catalog</a></li>
-            <li><a href="/about.html">About Us</a></li>
-            <li><a href="/wholesale.html">Wholesale</a></li>
-            <li><a href="/contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Direct Dispatch</h4>
-          <p style="font-size: 0.88rem; color: #a8a29e;">100% Online Store • Freshly Dispatched from Ooty, Nilgiris</p>
+        <div class="modal-body">
+          <div id="wishlistItemsList" style="max-height: 360px; overflow-y: auto;"></div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Ooty Hills Snacks & Nilgiri Spices. All rights reserved.</p>
+    </div>
+
+
+
+    <!-- Customer Saved Addresses Modal -->
+    <div class="modal-overlay" id="customerAddressModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>My Saved Address 📍</h3>
+          <button type="button" class="btn-close-drawer btn-modal-close">✕</button>
+        </div>
+        <div class="modal-body">
+          <div id="addressContentBox"></div>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <script src="/js/app.js"></script>
-  <script>
-    fetch('/api/settings').then(r => r.json()).then(data => {
-      if (data.success && data.settings.whatsappNumber) {
-        const clean = data.settings.whatsappNumber.replace(/\D/g, '');
-        const target = clean.length === 10 ? '91' + clean : clean;
-        const btn = document.getElementById('btnDirectWhatsAppContact');
-        if (btn) btn.href = `https://wa.me/${target}?text=Hello%20Ooty%20Hills!%20I%20have%20an%20inquiry.`;
-        const disp = document.getElementById('contactWhatsappDisplay');
-        if (disp) disp.innerHTML = `<strong>+91 ${clean.slice(-10)}</strong><br>Available 7 days a week: 8:00 AM - 9:00 PM`;
-      }
-    });
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <h3>Hill Mades</h3>
+            <p>Authentic hill station baking and estate teas delivered directly to your doorstep.</p>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul class="footer-links">
+              <li><a href="/">Home</a></li>
+              <li><a href="/shop.html">Shop Catalog</a></li>
+              <li><a href="/about.html">About Us</a></li>
+              <li><a href="/wholesale.html">Wholesale</a></li>
+              <li><a href="/contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Direct Dispatch</h4>
+            <p style="font-size: 0.88rem; color: #a8a29e;">100% Online Store • Freshly Dispatched from Ooty, Nilgiris
+            </p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 Hill Mades Snacks & Nilgiri Spices. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
 
-    document.getElementById('contactFeedbackForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const payload = {
-        customerName: document.getElementById('fbName').value.trim(),
-        rating: Number(document.getElementById('fbRating').value),
-        comment: document.getElementById('fbComment').value.trim()
-      };
-      try {
-        const res = await fetch('/api/feedback', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        const data = await res.json();
-        if (data.success) {
-          alert('Thank you for your feedback! It has been recorded.');
-          document.getElementById('contactFeedbackForm').reset();
+    <script src="/js/app.js"></script>
+    <script>
+      fetch('/api/settings').then(r => r.json()).then(data => {
+        if (data.success && data.settings.whatsappNumber) {
+          const clean = data.settings.whatsappNumber.replace(/\D/g, '');
+          const target = clean.length === 10 ? '91' + clean : clean;
+          const btn = document.getElementById('btnDirectWhatsAppContact');
+          if (btn) btn.href = `https://wa.me/${target}?text=Hello%20Ooty%20Hills!%20I%20have%20an%20inquiry.`;
+          const disp = document.getElementById('contactWhatsappDisplay');
+          if (disp) disp.innerHTML = `<strong>+91 ${clean.slice(-10)}</strong><br>Available 7 days a week: 8:00 AM - 9:00 PM`;
         }
-      } catch (err) {
-        alert('Server error saving feedback');
-      }
-    });
-  </script>
+      });
+
+      document.getElementById('contactFeedbackForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const payload = {
+          customerName: document.getElementById('fbName').value.trim(),
+          rating: Number(document.getElementById('fbRating').value),
+          comment: document.getElementById('fbComment').value.trim()
+        };
+        try {
+          const res = await fetch('/api/feedback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const data = await res.json();
+          if (data.success) {
+            alert('Thank you for your feedback! It has been recorded.');
+            document.getElementById('contactFeedbackForm').reset();
+          }
+        } catch (err) {
+          alert('Server error saving feedback');
+        }
+      });
+    </script>
 </body>
+
 </html>
