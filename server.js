@@ -12,9 +12,11 @@ const PORT = process.env.PORT || 3000;
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const uploadDir = path.join(__dirname, 'public', 'images');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
+    try {
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+    } catch (e) {}
     cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
@@ -47,7 +49,9 @@ const otpStore = new Map();
 function readJSON(file, fallback = []) {
   try {
     if (!fs.existsSync(file)) {
-      fs.writeFileSync(file, JSON.stringify(fallback, null, 2));
+      try {
+        fs.writeFileSync(file, JSON.stringify(fallback, null, 2));
+      } catch (e) {}
       return fallback;
     }
     const data = fs.readFileSync(file, 'utf8');
