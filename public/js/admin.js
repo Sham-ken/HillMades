@@ -175,7 +175,7 @@ async function verifyAndLogin(pin) {
       authOverlay.classList.add('hidden');
       loadAllAdminData();
     } else {
-      alert('Incorrect Security PIN. Default is 1234');
+      alert('Incorrect Security PIN. Please check your PIN and try again.');
       sessionStorage.removeItem('ooty_admin_pin');
     }
   } catch (err) {
@@ -645,7 +645,7 @@ window.printOrderInvoice = (orderId) => {
         <div class="header">
           <div class="title">HILL MADES SNACKS & CHOCOLATES</div>
           <div>100% Online Store • Fresh Dispatch from Ooty, Nilgiris</div>
-          <div>WhatsApp / Contact: ${adminState.settings.whatsappNumber || '919345738268'}</div>
+          <div>WhatsApp / Contact: ${adminState.settings.whatsappNumber || '919514292383'}</div>
           <div style="margin-top: 8px; font-weight: bold;">PACKING SLIP & BILL #${order.id}</div>
           <div>${new Date(order.createdAt).toLocaleString()}</div>
         </div>

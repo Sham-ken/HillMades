@@ -123,7 +123,7 @@ app.post('/api/settings', (req, res) => {
   const { authPin, ...newSettings } = req.body;
   const currentSettings = readJSON(SETTINGS_FILE, {});
   
-  if (authPin !== currentSettings.adminPin && authPin !== '1234') {
+  if (authPin !== currentSettings.adminPin && authPin !== '0909') {
     return res.status(403).json({ success: false, message: 'Invalid Admin PIN' });
   }
 
@@ -137,7 +137,7 @@ app.post('/api/settings', (req, res) => {
 app.post('/api/admin/verify', (req, res) => {
   const { pin } = req.body;
   const settings = readJSON(SETTINGS_FILE, {});
-  if (pin === settings.adminPin || pin === '1234') {
+  if (pin === settings.adminPin || pin === '0909') {
     return res.json({ success: true, message: 'Authorized' });
   }
   res.status(401).json({ success: false, message: 'Incorrect Admin PIN' });
@@ -550,7 +550,7 @@ async function dispatchFast2Sms(phone, otp) {
 app.post('/api/admin/test-sms', async (req, res) => {
   const { phone, authPin } = req.body;
   const settings = readJSON(SETTINGS_FILE, {});
-  if (authPin !== settings.adminPin && authPin !== '1234') {
+  if (authPin !== settings.adminPin && authPin !== '0909') {
     return res.status(403).json({ success: false, message: 'Invalid Admin PIN' });
   }
 
@@ -902,7 +902,7 @@ ${itemLines}
 ━━━━━━━━━━━━━━━━━━━
 Please confirm my order and send estimated delivery time! Thank you! 🙏`;
 
-  let rawPhone = (settings.whatsappNumber || '919345738268').replace(/\D/g, '');
+  let rawPhone = (settings.whatsappNumber || '919514292383').replace(/\D/g, '');
   if (rawPhone.length === 10) rawPhone = '91' + rawPhone;
 
   const whatsappUrl = `https://wa.me/${rawPhone}?text=${encodeURIComponent(whatsappMessage)}`;

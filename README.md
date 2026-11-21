@@ -24,7 +24,7 @@ A full-stack online ordering web platform for authentic Ooty snacks, homemade ch
 ---
 
 ### ⚙️ Store Owner Admin Panel (`http://localhost:3000/admin`)
-- **Protected Access**: Secure 4-digit PIN entrance (Default PIN: `1234`).
+- **Protected Access**: Secure 4-digit PIN entrance (PIN: `0909`).
 - **Live Sales Dashboard**: Total Revenue (₹), Total Orders, Pending Action, Delivered count.
 - **Order Management**:
    - View all customer orders with customer name, phone, address, and items.
@@ -52,4 +52,4 @@ A full-stack online ordering web platform for authentic Ooty snacks, homemade ch
 npm start
 ```
 - Customer Store: [http://localhost:3000](http://localhost:3000)
-- Admin Panel: [http://localhost:3000/admin](http://localhost:3000/admin) *(PIN: `1234`)*
+- Admin Panel: [http://localhost:3000/admin](http://localhost:3000/admin) *(PIN: `0909`)*

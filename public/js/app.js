@@ -24,7 +24,7 @@ const storeState = {
   settings: {
     freeDeliveryThreshold: 500,
     standardDeliveryCharge: 40,
-    whatsappNumber: '919345738268'
+    whatsappNumber: '919514292383'
   }
 };
 
@@ -1990,9 +1990,9 @@ function setupUIEvents() {
     });
   }
 
-  // Format dynamic WhatsApp URL targeting owner (9345738268) with full itemized bill
+  // Format dynamic WhatsApp URL targeting owner (9514292383) with full itemized bill
   function buildDynamicWhatsAppOrderUrl(order) {
-    const ownerPhone = '919345738268';
+    const ownerPhone = '919514292383';
     const items = order.items || [];
     const itemLines = items.map((it, idx) => 
       `${idx + 1}. *${it.name}* (${it.unit || 'Standard'}) x ${it.quantity} = ₹${it.total || (it.price * it.quantity)}`
@@ -2025,7 +2025,7 @@ Please confirm my order and send estimated delivery time! Thank you! 🙏`;
     return `https://wa.me/${ownerPhone}?text=${encodeURIComponent(text)}`;
   }
 
-  // Display Order Success Modal and launch WhatsApp to owner (9345738268)
+  // Display Order Success Modal and launch WhatsApp to owner (9514292383)
   function showOrderSuccessModal(order, whatsappUrl) {
     let modal = document.getElementById('orderSuccessModal');
     if (!modal) {
@@ -2035,7 +2035,7 @@ Please confirm my order and send estimated delivery time! Thank you! 🙏`;
       document.body.appendChild(modal);
     }
 
-    const ownerNumberFormatted = '+91 93457 38268';
+    const ownerNumberFormatted = '+91 95142 92383';
     const finalWhatsAppUrl = whatsappUrl || buildDynamicWhatsAppOrderUrl(order);
 
     const items = order.items || [];
@@ -3388,7 +3388,7 @@ function renderOrderCards(orders, container, phone, isGuestSearch = false) {
     `).join('');
 
     const waText = encodeURIComponent(`Hi Ooty Hills, please give me a delivery update for Order #${ord.id} (${ord.customer ? ord.customer.name : ''}). Thank you!`);
-    const waUrl = `https://wa.me/${storeState.settings.whatsappNumber || '919345738268'}?text=${waText}`;
+    const waUrl = `https://wa.me/${storeState.settings.whatsappNumber || '919514292383'}?text=${waText}`;
 
     // Prepare JSON items for reorder
     const itemsJson = encodeURIComponent(JSON.stringify(ord.items || []));
@@ -4075,7 +4075,7 @@ function renderPortalOrderCards(orders, container) {
     `).join('');
 
     const waText = encodeURIComponent(`Hi Ooty Hills Bakery, please provide a status update on Order #${ord.id}. Recipient: ${ord.customer ? ord.customer.name : ''}. Thank you!`);
-    const waUrl = `https://wa.me/${storeState.settings.whatsappNumber || '919345738268'}?text=${waText}`;
+    const waUrl = `https://wa.me/${storeState.settings.whatsappNumber || '919514292383'}?text=${waText}`;
     const itemsJson = encodeURIComponent(JSON.stringify(ord.items || []));
 
     return `
@@ -4815,7 +4815,7 @@ function initCollectionsFlyout() {
 }
 
 // =========================================================
-// FLOATING WHATSAPP BUTTON (MENAGAII REPLICA • OWNER: 9345738268)
+// FLOATING WHATSAPP BUTTON (MENAGAII REPLICA • OWNER: 9514292383)
 // =========================================================
 function ensureFloatingWhatsAppWidget() {
   const curPath = (window.location.pathname || '').toLowerCase();
@@ -4827,7 +4827,7 @@ function ensureFloatingWhatsAppWidget() {
 
   if (document.getElementById('floatingWhatsAppWidget')) return;
 
-  const targetOwnerPhone = '919345738268';
+  const targetOwnerPhone = '919514292383';
   const defaultMsg = encodeURIComponent('Hello Hill Mades! I have an inquiry about your authentic Nilgiris delicacies.');
   const waUrl = `https://wa.me/${targetOwnerPhone}?text=${defaultMsg}`;
 
@@ -4837,7 +4837,7 @@ function ensureFloatingWhatsAppWidget() {
   widget.target = '_blank';
   widget.rel = 'noopener noreferrer';
   widget.className = 'floating-whatsapp-widget';
-  widget.setAttribute('aria-label', 'Chat with Hill Mades on WhatsApp (+91 93457 38268)');
+  widget.setAttribute('aria-label', 'Chat with Hill Mades on WhatsApp (+91 95142 92383)');
   widget.innerHTML = `
     <div class="wa-icon-circle">
       <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
@@ -4845,17 +4845,17 @@ function ensureFloatingWhatsAppWidget() {
     </div>
     <div class="wa-label-box">
       <span class="wa-label-title">Chat with Us</span>
-      <span class="wa-label-sub">+91 93457 38268</span>
+      <span class="wa-label-sub">+91 95142 92383</span>
     </div>
   `;
   document.body.appendChild(widget);
 }
 
 // =========================================================
-// UNIVERSAL WHATSAPP CLICK INTERCEPTOR (OWNER: 9345738268)
+// UNIVERSAL WHATSAPP CLICK INTERCEPTOR (OWNER: 9514292383)
 // =========================================================
 function setupUniversalWhatsAppInterceptor() {
-  const targetOwnerPhone = '919345738268';
+  const targetOwnerPhone = '919514292383';
   document.addEventListener('click', (e) => {
     const waLink = e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"], .btn-checkout-whatsapp, .btn-whatsapp-chat');
     if (!waLink) return;
@@ -4869,7 +4869,7 @@ function setupUniversalWhatsAppInterceptor() {
       try {
         const url = new URL(currentHref);
         const pathDigits = url.pathname.replace(/\D/g, '');
-        if (!pathDigits.endsWith('9345738268')) {
+        if (!pathDigits.endsWith('9514292383')) {
           const oldText = url.searchParams.get('text') || 'Hello Hill Mades! I have an inquiry about your delicacies.';
           waLink.href = `https://wa.me/${targetOwnerPhone}?text=${encodeURIComponent(oldText)}`;
         }
