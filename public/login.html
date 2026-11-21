@@ -490,6 +490,10 @@
       try {
         const cust = JSON.parse(custData);
         if (!cust || !cust.name) return;
+        if (cust.phone && cust.phone.replace(/\D/g, '').endsWith('9345738268')) {
+          cust.phone = '9514292383';
+          localStorage.setItem('ooty_customer', JSON.stringify(cust));
+        }
         const initials = cust.name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase();
         if (container) {
           container.style.display = 'block';

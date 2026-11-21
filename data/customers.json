@@ -54,23 +54,13 @@
     "lastLoginAt": "2026-10-20T11:44:23.530Z"
   },
   {
-    "id": "CUST-8268",
-    "name": "Sanjay",
-    "phone": "9345738268",
-    "address": "12 Hill View",
-    "city": "Ooty",
-    "pincode": "643001",
-    "registeredAt": "2026-10-20T11:50:40.154Z",
-    "lastLoginAt": "2026-11-17T15:51:18.491Z"
-  },
-  {
     "id": "CUST-2383",
     "name": "Sanjay",
     "phone": "9514292383",
     "address": "12 Hill View",
     "city": "Ooty",
     "pincode": "643001",
-    "registeredAt": "2026-11-21T08:15:00.000Z",
+    "registeredAt": "2026-10-20T11:50:40.154Z",
     "lastLoginAt": "2026-11-21T08:15:00.000Z"
   },
   {

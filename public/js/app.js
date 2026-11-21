@@ -9,7 +9,14 @@ const storeState = {
   wishlist: [],
   customer: (function() {
     try {
-      return JSON.parse(localStorage.getItem('ooty_customer') || 'null');
+      const raw = localStorage.getItem('ooty_customer');
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (parsed && parsed.phone && parsed.phone.replace(/\D/g, '').endsWith('9345738268')) {
+        parsed.phone = '9514292383';
+        localStorage.setItem('ooty_customer', JSON.stringify(parsed));
+      }
+      return parsed;
     } catch (e) {
       return null;
     }

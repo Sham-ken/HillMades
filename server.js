@@ -427,7 +427,8 @@ app.post('/api/customer/otp/send', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Please enter your mobile number' });
   }
 
-  const cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  let cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  if (cleanPhone === '9345738268') cleanPhone = '9514292383';
   if (cleanPhone.length !== 10) {
     return res.status(400).json({ success: false, message: 'Mobile number must be exactly 10 digits' });
   }
@@ -578,7 +579,8 @@ app.post('/api/customer/otp/verify', (req, res) => {
     return res.status(400).json({ success: false, message: 'Phone number and OTP code are required' });
   }
 
-  const cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  let cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  if (cleanPhone === '9345738268') cleanPhone = '9514292383';
   const cleanOtp = otp.toString().trim();
 
   let isVerified = false;
@@ -669,7 +671,8 @@ app.get('/api/customer/orders', (req, res) => {
     return res.status(400).json({ success: false, message: 'Phone number required' });
   }
 
-  const cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  let cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  if (cleanPhone === '9345738268') cleanPhone = '9514292383';
   const orders = readJSON(ORDERS_FILE, []);
   const customerOrders = orders.filter(o => 
     o.customer && o.customer.phone && o.customer.phone.replace(/\D/g, '').endsWith(cleanPhone)
@@ -688,7 +691,8 @@ app.post('/api/customer/address', (req, res) => {
     return res.status(400).json({ success: false, message: 'Phone number required' });
   }
 
-  const cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  let cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  if (cleanPhone === '9345738268') cleanPhone = '9514292383';
   const customers = readJSON(CUSTOMERS_FILE, []);
   let customer = customers.find(c => c.phone && c.phone.replace(/\D/g, '').slice(-10) === cleanPhone);
 
@@ -727,7 +731,8 @@ app.post('/api/customer/auth', (req, res) => {
   const { phone, name } = req.body;
   if (!phone) return res.status(400).json({ success: false, message: 'Phone number required' });
 
-  const cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  let cleanPhone = phone.toString().replace(/\D/g, '').slice(-10);
+  if (cleanPhone === '9345738268') cleanPhone = '9514292383';
   const customers = readJSON(CUSTOMERS_FILE, []);
   let customer = customers.find(c => c.phone && c.phone.replace(/\D/g, '').slice(-10) === cleanPhone);
 
